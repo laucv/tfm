@@ -1,0 +1,8 @@
+main{
+  margin-top: 1.5rem;
+}
+mat-card {
+  width: 30%;
+  margin: auto;
+  text-align: center;
+}
