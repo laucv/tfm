@@ -12,7 +12,7 @@ export class Coordinate {
     this.column = column;
   }
 
-  getInstance(format: string): Coordinate {
+  public static getInstance(format: string): Coordinate {
     if (format === null)
       return null;
     try {
