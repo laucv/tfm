@@ -19,6 +19,7 @@ import {MatIconModule} from "@angular/material/icon";
 import {LoginComponent} from "./users/login/login.component";
 import {ProfileComponent} from "./users/profile/profile.component";
 import {WelcomeComponent} from "./welcome/welcome.component";
+import {DraughtsComponent} from "./game/Draughts.component";
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import {WelcomeComponent} from "./welcome/welcome.component";
     UserListComponent,
     LoginComponent,
     ProfileComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    DraughtsComponent
   ],
     imports: [
         BrowserModule,
