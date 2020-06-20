@@ -1,4 +1,4 @@
-import {Direction} from './Direction.model';
+import {Direction} from './Direction';
 
 export class Coordinate {
   private row: number;
@@ -65,7 +65,11 @@ export class Coordinate {
     if (this.getDiagonalDistance(coordinate) != 2)
       return null;
     const direction: Direction = this.getDirection(coordinate);
-    return this.plus(direction.getDistanceCoordinate(1));
+    return this.plus(this.getDistanceCoordinate(direction, 1));
+  }
+
+  private getDistanceCoordinate(direction: Direction, distance: number): Coordinate{
+    return new Coordinate(direction.getDistanceCoordinateRow(distance), direction.getDistanceCoordinateColumn(distance));
   }
 
   getBetweenDiagonalCoordinates(coordinate: Coordinate): Array<Coordinate> {
@@ -73,10 +77,10 @@ export class Coordinate {
       return null;
     let coordinates: Array<Coordinate> = new Array<Coordinate>();
     let direction: Direction = this.getDirection(coordinate);
-    let cursor: Coordinate = this.plus(direction.getDistanceCoordinate(1));
+    let cursor: Coordinate = this.plus(this.getDistanceCoordinate(direction, 1));
     while (cursor !== coordinate) {
       coordinates.push(cursor);
-      cursor = cursor.plus(direction.getDistanceCoordinate(1));
+      cursor = cursor.plus(this.getDistanceCoordinate(direction,1));
     }
     return coordinates;
   }
@@ -84,7 +88,7 @@ export class Coordinate {
   getDiagonalCoordinates(level: number): Array<Coordinate> {
     let diagonalCoordinates: Array<Coordinate> = new Array<Coordinate>();
     for (let direction of Direction.values()) {
-      let diagonalCoordinate: Coordinate = this.plus(direction.getDistanceCoordinate(level));
+      let diagonalCoordinate: Coordinate = this.plus(this.getDistanceCoordinate(direction, level));
       if (diagonalCoordinate != null && diagonalCoordinate.isWithIn())
         diagonalCoordinates.push(diagonalCoordinate);
     }
@@ -92,7 +96,7 @@ export class Coordinate {
   }
 
   getDiagonalCoordinate(direction: Direction, level: number): Coordinate {
-    return this.plus(direction.getDistanceCoordinate(level));
+    return this.plus(this.getDistanceCoordinate(direction, level));
   }
 
   isBlack(): boolean {

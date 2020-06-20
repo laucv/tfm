@@ -1,6 +1,6 @@
-import {Color} from "./Color.model";
-import {Coordinate} from "./Coordinate.model";
-import {Error} from './Error.model';
+import {Color} from "./Color";
+import {Coordinate} from "./Coordinate";
+import {Error} from './Error';
 
 export abstract class Piece {
 

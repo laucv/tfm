@@ -1,11 +1,10 @@
-import {Coordinate} from "./Coordinate.model";
+import {Coordinate} from "./Coordinate";
 
 export class Direction {
   public static readonly NE = new Direction(1,1);
   public static readonly SE = new Direction(-1,1);
   public static readonly SW = new Direction(-1,-1);
   public static readonly NW = new Direction(1,-1);
-
 
   private readonly horizontalShift: number;
   private readonly verticalShift: number;
@@ -27,13 +26,15 @@ export class Direction {
     return true;
   }
 
-  getDistanceCoordinate(distance: number): Coordinate{
-    let row = this.horizontalShift * distance;
-    let column = this.verticalShift * distance;
-    return new Coordinate(row, column);
+  getDistanceCoordinateRow(distance: number): number{
+    return this.horizontalShift * distance;
   }
 
-  static values(){
+  getDistanceCoordinateColumn(distance: number): number{
+    return this.verticalShift * distance;
+  }
+
+  static values(): Array<Direction>{
     return [Direction.NE, Direction.SE, Direction.SW, Direction.NW];
   }
 }

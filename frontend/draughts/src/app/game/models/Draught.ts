@@ -1,6 +1,6 @@
-import {Piece} from "./Piece.model";
-import {Coordinate} from "./Coordinate.model";
-import {Error} from "./Error.model";
+import {Piece} from "./Piece";
+import {Coordinate} from "./Coordinate";
+import {Error} from "./Error";
 
 export class Draught extends Piece {
 

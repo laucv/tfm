@@ -1,6 +1,6 @@
-import {Controller} from "./Controller.component";
-import {Game} from "../models/Game.model";
-import {State} from "../models/State.model";
+import {Controller} from "./Controller";
+import {Game} from "../models/Game";
+import {State} from "../models/State";
 
 export class CancelController extends Controller{
 

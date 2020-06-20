@@ -1,12 +1,12 @@
-import {CancelController} from "./CancelController.component";
-import {MoveController} from "./MoveController.component";
-import {State} from "../models/State.model";
-import {Game} from "../models/Game.model";
-import {InteractorController} from "./InteractorController.component";
-import {Coordinate} from "../models/Coordinate.model";
-import {Error} from "../models/Error.model";
-import {Color} from "../models/Color.model";
-import {InteractorControllersVisitor} from "./InteractorControllersVisitor.component";
+import {CancelController} from "./CancelController";
+import {MoveController} from "./MoveController";
+import {State} from "../models/State";
+import {Game} from "../models/Game";
+import {InteractorController} from "./InteractorController";
+import {Coordinate} from "../models/Coordinate";
+import {Error} from "../models/Error";
+import {Color} from "../models/Color";
+import {InteractorControllersVisitor} from "./InteractorControllersVisitor";
 
 export class PlayController extends InteractorController{
 

@@ -6,7 +6,7 @@ export enum Color {
 const LIMITS: number[] = [5, 2];
 const StringIsNumber = value => isNaN(Number(value)) === false;
 
-function isInitialRow(row: number): boolean {
+export function isInitialRow(row: number): boolean {
   switch (this) {
     case Color.WHITE:
       return row >= LIMITS[Color.WHITE.valueOf()];
@@ -18,8 +18,8 @@ function isInitialRow(row: number): boolean {
 
 export function colorGetInitialColor(coordinate: any): Color {
   if (coordinate.isBlack())
-    for (let color of this.colorValues())
-      if (color.isInitialRow(coordinate.getRow()))
+    for (let color of colorValues())
+      if (isInitialRow(coordinate.getRow()))
         return color;
   return null;
 }

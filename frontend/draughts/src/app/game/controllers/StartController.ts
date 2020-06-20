@@ -1,7 +1,7 @@
-import {InteractorController} from "./InteractorController.component";
-import {InteractorControllersVisitor} from "./InteractorControllersVisitor.component";
-import {Game} from "../models/Game.model";
-import {State} from "../models/State.model";
+import {InteractorController} from "./InteractorController";
+import {InteractorControllersVisitor} from "./InteractorControllersVisitor";
+import {Game} from "../models/Game";
+import {State} from "../models/State";
 
 export class StartController extends InteractorController{
 

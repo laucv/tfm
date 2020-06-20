@@ -1,10 +1,10 @@
-import {Game} from "../models/Game.model";
-import {State} from "../models/State.model";
-import {StateValue} from "../models/StateValue.model";
-import {InteractorController} from "./InteractorController.component";
-import {StartController} from "./StartController.component";
-import {PlayController} from "./PlayController.component";
-import {ResumeController} from "./ResumeController.component";
+import {Game} from "../models/Game";
+import {State} from "../models/State";
+import {StateValue} from "../models/StateValue";
+import {InteractorController} from "./InteractorController";
+import {StartController} from "./StartController";
+import {PlayController} from "./PlayController";
+import {ResumeController} from "./ResumeController";
 
 export class Logic {
 

@@ -1,4 +1,4 @@
-import {StateValue, stateValues} from "./StateValue.model";
+import {StateValue, stateValues} from "./StateValue";
 
 export class State{
 

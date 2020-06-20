@@ -1,6 +1,6 @@
 import {View} from "./views/View.component";
-import {Logic} from "./controllers/Logic.component";
-import {InteractorController} from "./controllers/InteractorController.component";
+import {Logic} from "./controllers/Logic";
+import {InteractorController} from "./controllers/InteractorController";
 
 export class Draughts {
 

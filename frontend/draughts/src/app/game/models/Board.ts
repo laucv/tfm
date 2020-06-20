@@ -1,8 +1,7 @@
-import {Piece} from "./Piece.model";
-import {Coordinate} from "./Coordinate.model";
-import {Color} from "./Color.model";
-import {Direction} from "./Direction.model";
-import {Pawn} from "./Pawn.model";
+import {Piece} from "./Piece";
+import {Coordinate} from "./Coordinate";
+import {Color} from "./Color";
+import {Direction} from "./Direction";
 
 export class Board {
 
@@ -13,9 +12,12 @@ export class Board {
   private static readonly MINIMUM_LIMIT_TO_JUMP = 1;
 
   constructor() {
-    for (let i = 0; i < Coordinate.getDimension(); i++)
+    this.pieces = [];
+    for (let i = 0; i < Coordinate.getDimension(); i++) {
+      this.pieces[i] = [];
       for (let j = 0; j < Coordinate.getDimension(); j++)
         this.pieces[i][j] = null;
+    }
   }
 
   getPiece(coordinate: Coordinate): Piece {
@@ -53,25 +55,25 @@ export class Board {
     return betweenDiagonalPieces;
   }
 
-  getColor(coordinate: Coordinate): Color{
+  getColor(coordinate: Coordinate): Color {
     const piece: Piece = this.getPiece(coordinate);
-    if(piece === null)
+    if (piece === null)
       return null;
     return piece.getColor();
   }
 
-  isEmpty(coordinate: Coordinate): boolean{
+  isEmpty(coordinate: Coordinate): boolean {
     return this.getPiece(coordinate) === null;
   }
 
-  getAvailablePiecesToJump(color: Color, coordinates: Array<Coordinate>): Array<Coordinate>{
+  getAvailablePiecesToJump(color: Color, coordinates: Array<Coordinate>): Array<Coordinate> {
     let availablePiecesToJump: Array<Coordinate> = new Array<Coordinate>();
     for (let coordinate of coordinates)
       this.checkDiagonals(availablePiecesToJump, color, coordinate);
     return availablePiecesToJump;
   }
 
-  checkDiagonals(availablePiecesToJump: Array<Coordinate>, color: Color, coordinate: Coordinate){
+  checkDiagonals(availablePiecesToJump: Array<Coordinate>, color: Color, coordinate: Coordinate) {
     if (color === Color.WHITE && coordinate.getRow() > Board.MINIMUM_LIMIT_TO_JUMP) {
       if (coordinate.getColumn() < Board.MAXIMUM_LIMIT_TO_JUMP && this.jumpIsPossible(coordinate, Direction.SE))
         availablePiecesToJump.push(coordinate);
@@ -86,19 +88,19 @@ export class Board {
     }
   }
 
-  jumpIsPossible(coordinate: Coordinate, direction: Direction): boolean{
+  jumpIsPossible(coordinate: Coordinate, direction: Direction): boolean {
     return this.getPiece(coordinate.getDiagonalCoordinate(direction, 1)) != null
       && this.getColor(coordinate.getDiagonalCoordinate(direction, 1)) !== this.getColor(coordinate)
       && this.getPiece(coordinate.getDiagonalCoordinate(direction, 2)) == null;
   }
 
-  getNumberOfPieces(color: Color): number{
+  getNumberOfPieces(color: Color): number {
     let result: number = 0;
     for (let i: number = 0; i < Coordinate.getDimension(); i++)
-    for (let j: number = 0; j < Coordinate.getDimension(); j++)
-    if (this.pieces[i][j] != null)
-      if (this.pieces[i][j].getColor() === color)
-        result++;
+      for (let j: number = 0; j < Coordinate.getDimension(); j++)
+        if (this.pieces[i][j] != null)
+          if (this.pieces[i][j].getColor() === color)
+            result++;
     return result;
   }
 

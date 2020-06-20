@@ -1,7 +1,7 @@
-import {Game} from "../models/Game.model";
-import {State} from "../models/State.model";
-import {Coordinate} from "../models/Coordinate.model";
-import {Color} from "../models/Color.model";
+import {Game} from "../models/Game";
+import {State} from "../models/State";
+import {Coordinate} from "../models/Coordinate";
+import {Color} from "../models/Color";
 
 export class Controller {
 

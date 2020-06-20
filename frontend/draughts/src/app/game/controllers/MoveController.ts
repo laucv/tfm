@@ -1,8 +1,8 @@
-import {Controller} from "./Controller.component";
-import {Game} from "../models/Game.model";
-import {State} from "../models/State.model";
-import {Error} from "../models/Error.model";
-import {Coordinate} from "../models/Coordinate.model";
+import {Controller} from "./Controller";
+import {Game} from "../models/Game";
+import {State} from "../models/State";
+import {Error} from "../models/Error";
+import {Coordinate} from "../models/Coordinate";
 
 export class MoveController extends Controller {
 

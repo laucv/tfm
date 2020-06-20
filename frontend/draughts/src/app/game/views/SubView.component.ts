@@ -1,4 +1,4 @@
-import {MyConsole} from "../utils/MyConsole.component";
+import {MyConsole} from "../utils/MyConsole";
 
 export class SubView{
 

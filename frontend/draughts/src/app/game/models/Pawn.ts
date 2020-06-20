@@ -1,7 +1,7 @@
-import {Piece} from "./Piece.model";
-import {Color} from "./Color.model";
-import {Coordinate} from "./Coordinate.model";
-import {Error} from "./Error.model";
+import {Piece} from "./Piece";
+import {Color} from "./Color";
+import {Coordinate} from "./Coordinate";
+import {Error} from "./Error";
 
 export class Pawn extends Piece{
 

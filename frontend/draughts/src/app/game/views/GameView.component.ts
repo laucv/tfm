@@ -1,7 +1,7 @@
 import {SubView} from "./SubView.component";
-import {InteractorController} from "../controllers/InteractorController.component";
-import {Piece} from "../models/Piece.model";
-import {Coordinate} from "../models/Coordinate.model";
+import {InteractorController} from "../controllers/InteractorController";
+import {Piece} from "../models/Piece";
+import {Coordinate} from "../models/Coordinate";
 
 export class GameView extends SubView{
 

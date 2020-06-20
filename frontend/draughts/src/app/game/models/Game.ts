@@ -1,11 +1,11 @@
-import {Board} from "./Board.model";
-import {Turn} from "./Turn.model";
-import {Coordinate} from "./Coordinate.model";
-import {Color, colorGetInitialColor} from "./Color.model";
-import {Piece} from "./Piece.model";
-import {Pawn} from "./Pawn.model";
-import {Error} from "./Error.model";
-import {Draught} from "./Draught.model";
+import {Board} from "./Board";
+import {Turn} from "./Turn";
+import {Coordinate} from "./Coordinate";
+import {Color, colorGetInitialColor} from "./Color";
+import {Piece} from "./Piece";
+import {Pawn} from "./Pawn";
+import {Error} from "./Error";
+import {Draught} from "./Draught";
 
 export class Game {
 

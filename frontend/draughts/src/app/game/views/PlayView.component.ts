@@ -1,9 +1,9 @@
 import {SubView} from "./SubView.component";
-import {PlayController} from "../controllers/PlayController.component";
-import {Error} from "../models/Error.model";
+import {PlayController} from "../controllers/PlayController";
+import {Error} from "../models/Error";
 import {GameView} from "./GameView.component";
-import {Color} from "../models/Color.model";
-import {Coordinate} from "../models/Coordinate.model";
+import {Color} from "../models/Color";
+import {Coordinate} from "../models/Coordinate";
 
 export class PlayView extends SubView{
   private static readonly COLOR_PARAM: string = "#color";

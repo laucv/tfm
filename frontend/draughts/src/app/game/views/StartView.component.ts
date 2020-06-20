@@ -1,5 +1,5 @@
 import {SubView} from "./SubView.component";
-import {StartController} from "../controllers/StartController.component";
+import {StartController} from "../controllers/StartController";
 import {GameView} from "./GameView.component";
 
 export class StartView extends SubView{

@@ -1,6 +1,6 @@
 import {SubView} from "./SubView.component";
-import {ResumeController} from "../controllers/ResumeController.component";
-import {YesNoDialog} from "../utils/YesNoDialog.component";
+import {ResumeController} from "../controllers/ResumeController";
+import {YesNoDialog} from "../utils/YesNoDialog";
 
 export class ResumeView extends SubView{
 

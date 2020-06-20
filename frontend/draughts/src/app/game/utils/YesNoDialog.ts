@@ -1,4 +1,4 @@
-import {MyConsole} from "./MyConsole.component";
+import {MyConsole} from "./MyConsole";
 
 export class YesNoDialog {
 

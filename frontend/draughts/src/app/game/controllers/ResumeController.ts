@@ -1,7 +1,7 @@
-import {InteractorController} from "./InteractorController.component";
-import {Game} from "../models/Game.model";
-import {State} from "../models/State.model";
-import {InteractorControllersVisitor} from "./InteractorControllersVisitor.component";
+import {InteractorController} from "./InteractorController";
+import {Game} from "../models/Game";
+import {State} from "../models/State";
+import {InteractorControllersVisitor} from "./InteractorControllersVisitor";
 
 export class ResumeController extends InteractorController{
 

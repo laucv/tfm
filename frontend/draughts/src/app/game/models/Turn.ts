@@ -1,4 +1,4 @@
-import {Color, colorValues} from "./Color.model";
+import {Color, colorValues} from "./Color";
 
 export class Turn {
 
