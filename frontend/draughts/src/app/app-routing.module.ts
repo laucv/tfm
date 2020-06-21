@@ -4,7 +4,7 @@ import {RegistrationComponent} from "./users/register/registration.component";
 import {LoginComponent} from "./users/login/login.component";
 import {ProfileComponent} from "./users/profile/profile.component";
 import {WelcomeComponent} from "./welcome/welcome.component";
-import {DraughtsComponent} from "./game/Draughts.component";
+import {DraughtsComponent} from "./game/views/views/Draughts.component";
 
 
 const routes: Routes = [

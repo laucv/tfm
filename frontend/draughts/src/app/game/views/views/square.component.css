@@ -1,0 +1,12 @@
+.playable {
+  height: 100%;
+  width: 12.5%;
+  display: inline-block;
+  background-color: #256f80;
+}
+.notplayable {
+  height: 100%;
+  width: 12.5%;
+  display: inline-block;
+  background-color: #FDFFD3;
+}

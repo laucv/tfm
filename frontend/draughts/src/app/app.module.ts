@@ -19,7 +19,10 @@ import {MatIconModule} from "@angular/material/icon";
 import {LoginComponent} from "./users/login/login.component";
 import {ProfileComponent} from "./users/profile/profile.component";
 import {WelcomeComponent} from "./welcome/welcome.component";
-import {DraughtsComponent} from "./game/Draughts.component";
+import {DraughtsComponent} from "./game/views/views/Draughts.component";
+import {SquareComponent} from './game/views/views/square.component';
+import {DraughtComponent} from './game/views/views/pieces/draught.component';
+import {PawnComponent} from './game/views/views/pieces/pawn.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +33,10 @@ import {DraughtsComponent} from "./game/Draughts.component";
     LoginComponent,
     ProfileComponent,
     WelcomeComponent,
-    DraughtsComponent
+    DraughtsComponent,
+    SquareComponent,
+    DraughtComponent,
+    PawnComponent
   ],
     imports: [
         BrowserModule,

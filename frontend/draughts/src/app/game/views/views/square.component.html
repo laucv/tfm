@@ -1,0 +1,6 @@
+<div [class.playable]="square.getRow()%2 === square.getColumn()%2"
+     [class.notplayable]="square.getRow()%2 !== square.getColumn()%2">
+  <p (click)="alert()">
+    <pawn [pawn]="square.getPiece()" ></pawn>
+  </p>
+</div>
