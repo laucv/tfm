@@ -1,4 +1,4 @@
-import {Direction} from './Direction';
+import {DirectionClass} from './DirectionClass';
 
 export class Coordinate {
   private row: number;
@@ -41,11 +41,11 @@ export class Coordinate {
     return new Coordinate(this.row + coordinate.row, this.column + coordinate.column);
   }
 
-  getDirection(coordinate: Coordinate): Direction {
+  getDirection(coordinate: Coordinate): DirectionClass {
     if (coordinate === null)
       return null;
     let substract: Coordinate = coordinate.substract(this);
-    for (let direction of Direction.values())
+    for (let direction of DirectionClass.values())
       if (direction.isOnDirection(substract))
         return direction;
     return null;
@@ -64,30 +64,40 @@ export class Coordinate {
   getBetweenDiagonalCoordinate(coordinate: Coordinate): Coordinate {
     if (this.getDiagonalDistance(coordinate) != 2)
       return null;
-    const direction: Direction = this.getDirection(coordinate);
+    const direction: DirectionClass = this.getDirection(coordinate);
     return this.plus(this.getDistanceCoordinate(direction, 1));
   }
 
-  private getDistanceCoordinate(direction: Direction, distance: number): Coordinate{
+  private getDistanceCoordinate(direction: DirectionClass, distance: number): Coordinate{
     return new Coordinate(direction.getDistanceCoordinateRow(distance), direction.getDistanceCoordinateColumn(distance));
   }
 
-  getBetweenDiagonalCoordinates(coordinate: Coordinate): Array<Coordinate> {
+  public getBetweenDiagonalCoordinates(coordinate: Coordinate): Array<Coordinate> {
     if (!this.isOnDiagonal(coordinate))
       return null;
-    let coordinates: Array<Coordinate> = new Array<Coordinate>();
-    let direction: Direction = this.getDirection(coordinate);
+    let coordinates: Array<Coordinate>   = new Array<Coordinate>();
+    let direction: DirectionClass = this.getDirection(coordinate);
     let cursor: Coordinate = this.plus(this.getDistanceCoordinate(direction, 1));
-    while (cursor !== coordinate) {
+    while (!cursor.equals(coordinate)) {
       coordinates.push(cursor);
       cursor = cursor.plus(this.getDistanceCoordinate(direction,1));
     }
     return coordinates;
   }
 
+  public equals(coordinate: Coordinate){
+    return this.getRow() === coordinate.getRow() && this.getColumn() === coordinate.getColumn();
+  }
+
+  private isCoordinatePossible(){
+    const validRow = this.getRow() >= Coordinate.LOWER_LIMIT && this.getRow() <= Coordinate.UPPER_LIMIT;
+    const validColumn = this.getColumn() >= Coordinate.LOWER_LIMIT && this.getColumn() <= Coordinate.UPPER_LIMIT;
+    return validRow && validColumn;
+  }
+
   getDiagonalCoordinates(level: number): Array<Coordinate> {
     let diagonalCoordinates: Array<Coordinate> = new Array<Coordinate>();
-    for (let direction of Direction.values()) {
+    for (let direction of DirectionClass.values()) {
       let diagonalCoordinate: Coordinate = this.plus(this.getDistanceCoordinate(direction, level));
       if (diagonalCoordinate != null && diagonalCoordinate.isWithIn())
         diagonalCoordinates.push(diagonalCoordinate);
@@ -95,7 +105,7 @@ export class Coordinate {
     return diagonalCoordinates;
   }
 
-  getDiagonalCoordinate(direction: Direction, level: number): Coordinate {
+  getDiagonalCoordinate(direction: DirectionClass, level: number): Coordinate {
     return this.plus(this.getDistanceCoordinate(direction, level));
   }
 
@@ -121,6 +131,10 @@ export class Coordinate {
 
   public static getDimension(): number {
     return Coordinate.DIMENSION;
+  }
+
+  public imprimir(): string{
+    return "Coordinate: [" + this.getRow() + ", " + this.getColumn() + "]";
   }
 
 }

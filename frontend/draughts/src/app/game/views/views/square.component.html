@@ -1,6 +1,14 @@
-<div [class.playable]="square.getRow()%2 === square.getColumn()%2"
-     [class.notplayable]="square.getRow()%2 !== square.getColumn()%2">
-  <p (click)="alert()">
-    <pawn [pawn]="square.getPiece()" ></pawn>
-  </p>
+<div [class.playable]="square.getRow()%2 !== square.getColumn()%2"
+     [class.notplayable]="square.getRow()%2 === square.getColumn()%2">
+  <div (click)="userMoves()" *ngIf="square.getRow()%2 !== square.getColumn()%2">
+    <pawn
+      *ngIf="square.getPieceType() === 'n' || square.getPieceType() === 'b'"
+      [pawn]="square.getPiece()"></pawn>
+    <draught
+      *ngIf="square.getPieceType() === 'N' || square.getPieceType() === 'B'"
+      [draught]="square.getPiece()"></draught>
+    <img *ngIf="square.getPieceType() === ''"
+         src="../../../../assets/images/noPiece.png"
+         class="noPawn">
+  </div>
 </div>

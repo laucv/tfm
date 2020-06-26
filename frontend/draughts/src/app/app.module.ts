@@ -19,10 +19,11 @@ import {MatIconModule} from "@angular/material/icon";
 import {LoginComponent} from "./users/login/login.component";
 import {ProfileComponent} from "./users/profile/profile.component";
 import {WelcomeComponent} from "./welcome/welcome.component";
-import {DraughtsComponent} from "./game/views/views/Draughts.component";
+import {BoardComponent} from "./game/views/views/board.component";
 import {SquareComponent} from './game/views/views/square.component';
 import {DraughtComponent} from './game/views/views/pieces/draught.component';
 import {PawnComponent} from './game/views/views/pieces/pawn.component';
+import {DraughtsService} from './game/draughts.service';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,7 @@ import {PawnComponent} from './game/views/views/pieces/pawn.component';
     LoginComponent,
     ProfileComponent,
     WelcomeComponent,
-    DraughtsComponent,
+    BoardComponent,
     SquareComponent,
     DraughtComponent,
     PawnComponent
@@ -52,7 +53,8 @@ import {PawnComponent} from './game/views/views/pieces/pawn.component';
         MatIconModule
     ],
   providers: [
-    UserService
+    UserService,
+    DraughtsService
   ],
   bootstrap: [AppComponent]
 })

@@ -22,4 +22,18 @@ export class MySquare{
   public getPiece(): Piece{
     return this.piece;
   }
+
+  public getPieceType(): string{
+    if(this.piece === null)
+      return '';
+    return this.piece.getCode();
+  }
+
+  clear(){
+    this.piece = null;
+  }
+
+  put(piece: Piece){
+    this.piece = piece;
+  }
 }

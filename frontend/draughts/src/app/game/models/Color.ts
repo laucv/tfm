@@ -1,3 +1,5 @@
+import {Coordinate} from './Coordinate';
+
 export enum Color {
   WHITE,
   BLACK
@@ -6,21 +8,29 @@ export enum Color {
 const LIMITS: number[] = [5, 2];
 const StringIsNumber = value => isNaN(Number(value)) === false;
 
-export function isInitialRow(row: number): boolean {
-  switch (this) {
-    case Color.WHITE:
-      return row >= LIMITS[Color.WHITE.valueOf()];
-    case Color.BLACK:
-      return row <= LIMITS[Color.BLACK.valueOf()];
+function getColor(row: number): Color {
+  if (row >= LIMITS[Color.WHITE.valueOf()]) {
+    return Color.WHITE;
+  } else if (row <= LIMITS[Color.BLACK.valueOf()]) {
+    return Color.BLACK;
   }
-  return false;
+  return null;
 }
 
-export function colorGetInitialColor(coordinate: any): Color {
-  if (coordinate.isBlack())
-    for (let color of colorValues())
-      if (isInitialRow(coordinate.getRow()))
-        return color;
+export function colorGetInitialColor(coordinate: Coordinate): Color {
+  if (coordinate.isBlack()) {
+    for (let color of colorValues()) {
+      return getColor(coordinate.getRow())
+    }
+  }
+  return null;
+}
+
+export function getColorValue(color: number): Color {
+  if(color === 0)
+    return Color.WHITE;
+  if(color === 1)
+    return Color.BLACK;
   return null;
 }
 

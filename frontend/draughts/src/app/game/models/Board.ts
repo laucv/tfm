@@ -1,7 +1,7 @@
-import {Piece} from "./Piece";
-import {Coordinate} from "./Coordinate";
-import {Color} from "./Color";
-import {Direction} from "./Direction";
+import {Piece} from './Piece';
+import {Coordinate} from './Coordinate';
+import {Color} from './Color';
+import {DirectionClass} from './DirectionClass';
 
 export class Board {
 
@@ -15,50 +15,58 @@ export class Board {
     this.pieces = [];
     for (let i = 0; i < Coordinate.getDimension(); i++) {
       this.pieces[i] = [];
-      for (let j = 0; j < Coordinate.getDimension(); j++)
+      for (let j = 0; j < Coordinate.getDimension(); j++) {
         this.pieces[i][j] = null;
+      }
     }
   }
 
   getPiece(coordinate: Coordinate): Piece {
-    if (coordinate === null)
+    if (coordinate === null) {
       return null;
+    }
     return this.pieces[coordinate.getRow()][coordinate.getColumn()];
   }
 
   put(coordinate: Coordinate, piece: Piece) {
-    if (coordinate === null)
+    if (coordinate !== null) {
       this.pieces[coordinate.getRow()][coordinate.getColumn()] = piece;
+    }
   }
 
   remove(coordinate: Coordinate): Piece {
-    if (this.getPiece(coordinate) === null)
+    if (this.getPiece(coordinate) === null) {
       return null;
+    }
     let piece: Piece = this.getPiece(coordinate);
     this.put(coordinate, null);
     return piece;
   }
 
   move(origin: Coordinate, target: Coordinate) {
-    if (this.getPiece(origin) !== null)
-      this.put(target, this.remove(origin))
+    if (this.getPiece(origin) !== null) {
+      this.put(target, this.remove(origin));
+    }
   }
 
   getBetweenDiagonalPieces(origin: Coordinate, target: Coordinate): Array<Piece> {
     let betweenDiagonalPieces: Array<Piece> = new Array<Piece>();
-    if (origin.isOnDiagonal(target))
+    if (origin.isOnDiagonal(target)) {
       for (let coordinate of origin.getBetweenDiagonalCoordinates(target)) {
         let piece: Piece = this.getPiece(coordinate);
-        if (piece != null)
+        if (piece != null) {
           betweenDiagonalPieces.push(piece);
+        }
       }
+    }
     return betweenDiagonalPieces;
   }
 
   getColor(coordinate: Coordinate): Color {
     const piece: Piece = this.getPiece(coordinate);
-    if (piece === null)
+    if (piece === null) {
       return null;
+    }
     return piece.getColor();
   }
 
@@ -68,27 +76,32 @@ export class Board {
 
   getAvailablePiecesToJump(color: Color, coordinates: Array<Coordinate>): Array<Coordinate> {
     let availablePiecesToJump: Array<Coordinate> = new Array<Coordinate>();
-    for (let coordinate of coordinates)
+    for (let coordinate of coordinates) {
       this.checkDiagonals(availablePiecesToJump, color, coordinate);
+    }
     return availablePiecesToJump;
   }
 
   checkDiagonals(availablePiecesToJump: Array<Coordinate>, color: Color, coordinate: Coordinate) {
     if (color === Color.WHITE && coordinate.getRow() > Board.MINIMUM_LIMIT_TO_JUMP) {
-      if (coordinate.getColumn() < Board.MAXIMUM_LIMIT_TO_JUMP && this.jumpIsPossible(coordinate, Direction.SE))
+      if (coordinate.getColumn() < Board.MAXIMUM_LIMIT_TO_JUMP && this.jumpIsPossible(coordinate, DirectionClass.SE)) {
         availablePiecesToJump.push(coordinate);
-      if (coordinate.getColumn() > Board.MINIMUM_LIMIT_TO_JUMP && this.jumpIsPossible(coordinate, Direction.SW))
+      }
+      if (coordinate.getColumn() > Board.MINIMUM_LIMIT_TO_JUMP && this.jumpIsPossible(coordinate, DirectionClass.SW)) {
         availablePiecesToJump.push(coordinate);
+      }
     }
     if (color === Color.BLACK && coordinate.getRow() < Board.MAXIMUM_LIMIT_TO_JUMP) {
-      if (coordinate.getColumn() > Board.MINIMUM_LIMIT_TO_JUMP && this.jumpIsPossible(coordinate, Direction.NW))
+      if (coordinate.getColumn() > Board.MINIMUM_LIMIT_TO_JUMP && this.jumpIsPossible(coordinate, DirectionClass.NW)) {
         availablePiecesToJump.push(coordinate);
-      if (coordinate.getColumn() < Board.MAXIMUM_LIMIT_TO_JUMP && this.jumpIsPossible(coordinate, Direction.NE))
+      }
+      if (coordinate.getColumn() < Board.MAXIMUM_LIMIT_TO_JUMP && this.jumpIsPossible(coordinate, DirectionClass.NE)) {
         availablePiecesToJump.push(coordinate);
+      }
     }
   }
 
-  jumpIsPossible(coordinate: Coordinate, direction: Direction): boolean {
+  jumpIsPossible(coordinate: Coordinate, direction: DirectionClass): boolean {
     return this.getPiece(coordinate.getDiagonalCoordinate(direction, 1)) != null
       && this.getColor(coordinate.getDiagonalCoordinate(direction, 1)) !== this.getColor(coordinate)
       && this.getPiece(coordinate.getDiagonalCoordinate(direction, 2)) == null;
@@ -96,13 +109,30 @@ export class Board {
 
   getNumberOfPieces(color: Color): number {
     let result: number = 0;
-    for (let i: number = 0; i < Coordinate.getDimension(); i++)
-      for (let j: number = 0; j < Coordinate.getDimension(); j++)
-        if (this.pieces[i][j] != null)
-          if (this.pieces[i][j].getColor() === color)
+    for (let i: number = 0; i < Coordinate.getDimension(); i++) {
+      for (let j: number = 0; j < Coordinate.getDimension(); j++) {
+        if (this.pieces[i][j] != null) {
+          if (this.pieces[i][j].getColor() === color) {
             result++;
+          }
+        }
+      }
+    }
     return result;
   }
 
-
+  imprimiiiiir(){
+    let result: string = '|'
+    for (let i: number = 0; i < Coordinate.getDimension(); i++) {
+      for (let j: number = 0; j < Coordinate.getDimension(); j++) {
+        if (this.pieces[i][j] !== null) {
+          result += this.pieces[i][j].getCode() + '|';
+        } else {
+          result += '  |';
+        }
+      }
+      result += '\n|';
+    }
+    return result;
+  }
 }

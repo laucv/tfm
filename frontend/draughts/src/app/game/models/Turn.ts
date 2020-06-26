@@ -1,4 +1,4 @@
-import {Color, colorValues} from "./Color";
+import {Color, colorValues, getColorValue} from './Color';
 
 export class Turn {
 
@@ -13,7 +13,7 @@ export class Turn {
   }
 
   getOppositeColor(): Color{
-    return colorValues()[(this.color.valueOf() + 1) % 2];
+    return getColorValue(Number(this.color.valueOf() + 1) % 2);
   }
 
   getColor() : Color{

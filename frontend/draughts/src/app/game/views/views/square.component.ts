@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {MySquare} from './mySquare';
+import {DraughtsService} from '../../draughts.service';
 
 @Component({
   selector: 'app-board-square',
@@ -10,10 +11,10 @@ export class SquareComponent{
 
   @Input() square: MySquare;
 
-  constructor() {
+  constructor(private draughtsService: DraughtsService) {
   }
 
-  alert(){
-    alert("row: " + this.square.getRow() + " column: " + this.square.getColumn());
+  userMoves(){
+    this.draughtsService.userClicks(this.square.getPiece(), this.square.getRow(), this.square.getColumn());
   }
 }

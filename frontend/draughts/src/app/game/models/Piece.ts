@@ -5,7 +5,6 @@ import {Error} from './Error';
 export abstract class Piece {
 
   protected color: Color;
-  private static readonly CODES: string[] = ['b', 'n'];
 
   constructor(color: Color) {
     if (color !== null)
@@ -14,7 +13,7 @@ export abstract class Piece {
 
   isCorrectMovement(betweenDiagonalPieces: Array<Piece>, pair: number, coordinates: Coordinate[]): Error {
     if (coordinates[pair] === null)
-      if (coordinates[pair + 1] != null)
+      if (coordinates[pair + 1] === null)
         return Error.BAD_FORMAT;
     if (!coordinates[pair].isOnDiagonal(coordinates[pair + 1]))
       return Error.NOT_DIAGONAL;
@@ -44,7 +43,5 @@ export abstract class Piece {
     return this.color;
   }
 
-  getCode(): string {
-    return Piece.CODES[this.color.valueOf()];
-  }
+  abstract getCode():string;
 }
