@@ -1,4 +1,4 @@
-import {Color, colorValues, getColorValue} from './Color';
+import {Color, getColorValue} from './Color';
 
 export class Turn {
 

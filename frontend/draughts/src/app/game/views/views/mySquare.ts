@@ -4,11 +4,13 @@ export class MySquare{
   private row: number;
   private column: number;
   private piece: Piece;
+  private selected: boolean;
 
   constructor(piece: Piece, row: number, column: number) {
     this.row = row;
     this.column = column;
     this.piece = piece;
+    this.selected = false;
   }
 
   getRow(): number{
@@ -27,6 +29,14 @@ export class MySquare{
     if(this.piece === null)
       return '';
     return this.piece.getCode();
+  }
+
+  public setSelected(value: boolean){
+    this.selected = value;
+  }
+
+  public isSelected(): boolean{
+    return this.selected;
   }
 
   clear(){

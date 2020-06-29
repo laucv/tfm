@@ -13,15 +13,17 @@ export class Coordinate {
   }
 
   public static getInstance(format: string): Coordinate {
-    if (format === null)
+    if (format === null) {
       return null;
+    }
     try {
       let value = Number(format);
       let row = value / 10 - 1;
       let column = value % 10 - 1;
       let coordinate: Coordinate = new Coordinate(row, column);
-      if (!coordinate.isWithIn())
+      if (!coordinate.isWithIn()) {
         return null;
+      }
       return coordinate;
     } catch (exception) {
       return null;
@@ -29,8 +31,8 @@ export class Coordinate {
   }
 
   private isWithIn(): boolean {
-    return Coordinate.LOWER_LIMIT <= Coordinate["row"] && Coordinate["row"] <= Coordinate.UPPER_LIMIT
-      && Coordinate.LOWER_LIMIT <= Coordinate["column"] && Coordinate["column"] <= Coordinate.UPPER_LIMIT;
+    return Coordinate.LOWER_LIMIT <= this.row && this.row <= Coordinate.UPPER_LIMIT
+      && Coordinate.LOWER_LIMIT <= this.column && this.column <= Coordinate.UPPER_LIMIT;
   }
 
   private substract(coordinate: Coordinate): Coordinate {
@@ -42,12 +44,15 @@ export class Coordinate {
   }
 
   getDirection(coordinate: Coordinate): DirectionClass {
-    if (coordinate === null)
+    if (coordinate === null) {
       return null;
+    }
     let substract: Coordinate = coordinate.substract(this);
-    for (let direction of DirectionClass.values())
-      if (direction.isOnDirection(substract))
+    for (let direction of DirectionClass.values()) {
+      if (direction.isOnDirection(substract)) {
         return direction;
+      }
+    }
     return null;
   }
 
@@ -56,51 +61,49 @@ export class Coordinate {
   }
 
   getDiagonalDistance(coordinate: Coordinate): number {
-    if (!this.isOnDiagonal(coordinate))
+    if (!this.isOnDiagonal(coordinate)) {
       return null;
+    }
     return Math.abs(this.substract(coordinate).getRow());
   }
 
   getBetweenDiagonalCoordinate(coordinate: Coordinate): Coordinate {
-    if (this.getDiagonalDistance(coordinate) != 2)
+    if (this.getDiagonalDistance(coordinate) != 2) {
       return null;
+    }
     const direction: DirectionClass = this.getDirection(coordinate);
     return this.plus(this.getDistanceCoordinate(direction, 1));
   }
 
-  private getDistanceCoordinate(direction: DirectionClass, distance: number): Coordinate{
+  private getDistanceCoordinate(direction: DirectionClass, distance: number): Coordinate {
     return new Coordinate(direction.getDistanceCoordinateRow(distance), direction.getDistanceCoordinateColumn(distance));
   }
 
   public getBetweenDiagonalCoordinates(coordinate: Coordinate): Array<Coordinate> {
-    if (!this.isOnDiagonal(coordinate))
+    if (!this.isOnDiagonal(coordinate)) {
       return null;
-    let coordinates: Array<Coordinate>   = new Array<Coordinate>();
+    }
+    let coordinates: Array<Coordinate> = new Array<Coordinate>();
     let direction: DirectionClass = this.getDirection(coordinate);
     let cursor: Coordinate = this.plus(this.getDistanceCoordinate(direction, 1));
     while (!cursor.equals(coordinate)) {
       coordinates.push(cursor);
-      cursor = cursor.plus(this.getDistanceCoordinate(direction,1));
+      cursor = cursor.plus(this.getDistanceCoordinate(direction, 1));
     }
     return coordinates;
   }
 
-  public equals(coordinate: Coordinate){
+  public equals(coordinate: Coordinate) {
     return this.getRow() === coordinate.getRow() && this.getColumn() === coordinate.getColumn();
-  }
-
-  private isCoordinatePossible(){
-    const validRow = this.getRow() >= Coordinate.LOWER_LIMIT && this.getRow() <= Coordinate.UPPER_LIMIT;
-    const validColumn = this.getColumn() >= Coordinate.LOWER_LIMIT && this.getColumn() <= Coordinate.UPPER_LIMIT;
-    return validRow && validColumn;
   }
 
   getDiagonalCoordinates(level: number): Array<Coordinate> {
     let diagonalCoordinates: Array<Coordinate> = new Array<Coordinate>();
     for (let direction of DirectionClass.values()) {
       let diagonalCoordinate: Coordinate = this.plus(this.getDistanceCoordinate(direction, level));
-      if (diagonalCoordinate != null && diagonalCoordinate.isWithIn())
+      if (diagonalCoordinate !== null && diagonalCoordinate.isWithIn()) {
         diagonalCoordinates.push(diagonalCoordinate);
+      }
     }
     return diagonalCoordinates;
   }
@@ -133,7 +136,7 @@ export class Coordinate {
     return Coordinate.DIMENSION;
   }
 
-  public imprimir(): string{
+  public imprimir(): string {
     return "Coordinate: [" + this.getRow() + ", " + this.getColumn() + "]";
   }
 

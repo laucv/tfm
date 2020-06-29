@@ -74,11 +74,10 @@ export class Board {
     return this.getPiece(coordinate) === null;
   }
 
-  getAvailablePiecesToJump(color: Color, coordinates: Array<Coordinate>): Array<Coordinate> {
+  getAvailablePiecesToJump(coordinate: Coordinate): Array<Coordinate> {
     let availablePiecesToJump: Array<Coordinate> = new Array<Coordinate>();
-    for (let coordinate of coordinates) {
-      this.checkDiagonals(availablePiecesToJump, color, coordinate);
-    }
+    let color = this.getPiece(coordinate).getColor();
+    this.checkDiagonals(availablePiecesToJump, color, coordinate);
     return availablePiecesToJump;
   }
 
@@ -102,9 +101,9 @@ export class Board {
   }
 
   jumpIsPossible(coordinate: Coordinate, direction: DirectionClass): boolean {
-    return this.getPiece(coordinate.getDiagonalCoordinate(direction, 1)) != null
+    return this.getPiece(coordinate.getDiagonalCoordinate(direction, 1)) !== null
       && this.getColor(coordinate.getDiagonalCoordinate(direction, 1)) !== this.getColor(coordinate)
-      && this.getPiece(coordinate.getDiagonalCoordinate(direction, 2)) == null;
+      && this.getPiece(coordinate.getDiagonalCoordinate(direction, 2)) === null;
   }
 
   getNumberOfPieces(color: Color): number {
@@ -121,8 +120,8 @@ export class Board {
     return result;
   }
 
-  imprimiiiiir(){
-    let result: string = '|'
+  imprimiiiiir() {
+    let result: string = '|';
     for (let i: number = 0; i < Coordinate.getDimension(); i++) {
       for (let j: number = 0; j < Coordinate.getDimension(); j++) {
         if (this.pieces[i][j] !== null) {

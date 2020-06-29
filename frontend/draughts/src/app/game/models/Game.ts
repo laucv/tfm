@@ -78,9 +78,6 @@ export class Game {
       return Error.NOT_EMPTY_TARGET;
     }
     let betweenDiagonalPieces: Array<Piece> = this.board.getBetweenDiagonalPieces(coordinates[pair], coordinates[pair + 1]);
-    // alert("betweenDiagonalPieces.length: " + betweenDiagonalPieces.length)
-    // for(let i = 0; i < betweenDiagonalPieces.length; i++)
-    //   alert(betweenDiagonalPieces[i].getCode())
     return this.board.getPiece(coordinates[pair]).isCorrectMovement(betweenDiagonalPieces, pair, coordinates);
   }
 
@@ -157,12 +154,9 @@ export class Game {
   }
 
   private isBlockedCoordinate(coordinate: Coordinate): boolean {
-    let coordinateArray: Array<Coordinate> = new Array<Coordinate>();
-    coordinateArray.push(coordinate);
     for (let i = 1; i <= 2; i++) {
       for (let target of coordinate.getDiagonalCoordinates(i)) {
-        coordinateArray.push(target);
-        if (this.isCorrectPairMove(0, coordinateArray) == null) {
+        if (this.isCorrectPairMove(0, [coordinate, target]) === null) {
           return false;
         }
       }
@@ -199,8 +193,8 @@ export class Game {
     return this.board.getPiece(coordinate);
   }
 
-  public isMultiJumpPossible(coordinates: Array<Coordinate>) {
-    if (this.board.getAvailablePiecesToJump(this.getTurnColor(), coordinates).length === 0) {
+  public isMultiJumpPossible(coordinate: Coordinate) {
+    if (this.board.getAvailablePiecesToJump(coordinate).length === 0) {
       return false;
     }
     return true;
@@ -216,5 +210,9 @@ export class Game {
 
   impresion() {
     return this.board.imprimiiiiir();
+  }
+
+  public changeTurnToAllowMultiJump(){
+    this.turn.change();
   }
 }

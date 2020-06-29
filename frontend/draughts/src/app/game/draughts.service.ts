@@ -5,7 +5,7 @@ import {Game} from './models/Game';
 import {Error, getError} from './models/Error';
 import {MySquare} from './views/views/mySquare';
 import {Pawn} from './models/Pawn';
-import {Color, colorValues, getColorValue} from './models/Color';
+import {Color, colorValues} from './models/Color';
 import {Draught} from './models/Draught';
 import {DirectionClass} from './models/DirectionClass';
 
@@ -18,6 +18,7 @@ export class DraughtsService {
   private game: Game;
   private boardView: MySquare[][];
   private pieceIsSelected: boolean;
+  private multiJump: boolean;
 
   constructor() {
     this.game = new Game();
@@ -25,10 +26,11 @@ export class DraughtsService {
     this.coordinate = null;
     this.pieceIsSelected = false;
     this.turn = this.game.getTurnColor();
+    this.multiJump = false;
     this.initBoard();
   }
 
-  public getBoardView(): MySquare[][]{
+  public getBoardView(): MySquare[][] {
     return this.boardView;
   }
 
@@ -56,13 +58,23 @@ export class DraughtsService {
     }
   }
 
+  private clearHighlightedPiece(){
+    if (this.coordinate !== null && !this.multiJump) {
+      this.boardView[this.coordinate.getRow()][this.coordinate.getColumn()].setSelected(false);
+    }
+  }
+
   public userClicks(piece: Piece, row: number, column: number) {
-    if (piece !== null) {
+    this.clearHighlightedPiece();
+    if (piece !== null && !this.multiJump) {
+      this.boardView[row][column].setSelected(true);
       this.piece = piece;
       this.coordinate = new Coordinate(row, column);
       this.pieceIsSelected = true;
     } else if (piece === null && this.pieceIsSelected) {
       this.movePiece(new Coordinate(row, column));
+    } else if(this.multiJump){
+      this.boardView[this.coordinate.getRow()][this.coordinate.getColumn()].setSelected(true);
     } else {
       this.pieceIsSelected = false;
     }
@@ -93,11 +105,24 @@ export class DraughtsService {
       if (this.coordinate.getDiagonalCoordinate(direction, 2).equals(target)) {
         this.clearJumpedPiece(this.coordinate.getDiagonalCoordinate(direction, 1));
       }
-      this.transformPawnToDraught(target);
-      this.pieceIsSelected = false;
-      this.turn = this.game.getTurnColor();
+      this.multiJump = this.game.isMultiJumpPossible(target) && this.coordinate.getDiagonalDistance(target) === 2;
+      if (this.multiJump) {
+        this.boardView[this.coordinate.getRow()][this.coordinate.getColumn()].setSelected(false);
+        this.boardView[target.getRow()][target.getColumn()].setSelected(true);
+        this.game.changeTurnToAllowMultiJump();
+        this.coordinate = target;
+        return;
+      } else {
+        this.transformPawnToDraught(target);
+        this.pieceIsSelected = false;
+        this.boardView[this.coordinate.getRow()][this.coordinate.getColumn()].setSelected(false);
+        this.turn = this.game.getTurnColor();
+      }
     } else {
       alert(getError(error));
+    }
+    if (this.game.isBlocked()) {
+      alert('Fin del juego, el ganador es: ' + colorValues()[this.game.getOppositeTurnColor()]);
     }
   }
 
