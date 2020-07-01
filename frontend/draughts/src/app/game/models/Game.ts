@@ -55,15 +55,6 @@ export class Game {
     return error;
   }
 
-  private removeRandomPieceAfterNotEating(origin: Coordinate, lastTarget: Coordinate, coordinates: Array<Coordinate>) {
-    const random: number = Math.random() * coordinates.length;
-    if (coordinates[random] === origin) {
-      this.board.remove(lastTarget);
-    } else {
-      this.board.remove(coordinates[random]);
-    }
-  }
-
   private isCorrectPairMove(pair: number, coordinates: Array<Coordinate>): Error {
     if (coordinates[pair] === null || coordinates[pair + 1] === null) {
       return Error.BAD_FORMAT;
@@ -208,11 +199,11 @@ export class Game {
     return Coordinate.getDimension();
   }
 
-  impresion() {
-    return this.board.imprimiiiiir();
-  }
-
   public changeTurnToAllowMultiJump(){
     this.turn.change();
+  }
+
+  public changePiece(piece: Piece, row: number, column: number){
+    this.board.setPiece(piece, row, column);
   }
 }

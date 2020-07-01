@@ -1,14 +1,14 @@
 import {Component, OnInit} from '@angular/core';
-import {Coordinate} from '../../models/Coordinate';
-import {MySquare} from './mySquare';
-import {Pawn} from '../../models/Pawn';
-import {Color} from '../../models/Color';
-import {DraughtsService} from '../../draughts.service';
+import {Coordinate} from '../models/Coordinate';
+import {MySquare} from '../models/mySquare';
+import {Pawn} from '../models/Pawn';
+import {Color} from '../models/Color';
+import {DraughtsService} from '../draughts.service';
 
 @Component({
   selector: 'app-draughts',
-  templateUrl: './board.component.html',
-  styleUrls: ['./board.component.css']
+  templateUrl: '../views/board.component.html',
+  styleUrls: ['../views/board.component.css']
 })
 export class BoardComponent implements OnInit {
 

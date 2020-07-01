@@ -34,13 +34,6 @@ export class DirectionClass {
     return this.verticalShift * distance;
   }
 
-  getDirection(){
-    for(let direction = 0; direction < DirectionClass.values().length; direction++)
-      if(this.horizontalShift === DirectionClass.values()[direction].horizontalShift
-        && this.verticalShift === DirectionClass.values()[direction].verticalShift)
-        return Direction.get(DirectionClass.values()[direction])
-  }
-
   static values(): Array<DirectionClass>{
     return [DirectionClass.NE, DirectionClass.SE, DirectionClass.SW, DirectionClass.NW];
   }

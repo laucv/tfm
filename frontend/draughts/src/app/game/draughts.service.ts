@@ -2,14 +2,16 @@ import {Injectable} from '@angular/core';
 import {Piece} from './models/Piece';
 import {Coordinate} from './models/Coordinate';
 import {Game} from './models/Game';
-import {Error, getError} from './models/Error';
-import {MySquare} from './views/views/mySquare';
+import {Error, getErrorValues} from './models/Error';
+import {MySquare} from './models/mySquare';
 import {Pawn} from './models/Pawn';
 import {Color, colorValues} from './models/Color';
 import {Draught} from './models/Draught';
 import {DirectionClass} from './models/DirectionClass';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class DraughtsService {
 
   private piece: Piece;
@@ -58,13 +60,13 @@ export class DraughtsService {
     }
   }
 
-  private clearHighlightedPiece(){
+  private clearHighlightedPiece() {
     if (this.coordinate !== null && !this.multiJump) {
       this.boardView[this.coordinate.getRow()][this.coordinate.getColumn()].setSelected(false);
     }
   }
 
-  public userClicks(piece: Piece, row: number, column: number) {
+  public userClicks(piece: Piece, row: number, column: number): Error {
     this.clearHighlightedPiece();
     if (piece !== null && !this.multiJump) {
       this.boardView[row][column].setSelected(true);
@@ -72,12 +74,13 @@ export class DraughtsService {
       this.coordinate = new Coordinate(row, column);
       this.pieceIsSelected = true;
     } else if (piece === null && this.pieceIsSelected) {
-      this.movePiece(new Coordinate(row, column));
-    } else if(this.multiJump){
+      return this.movePiece(new Coordinate(row, column));
+    } else if (this.multiJump) {
       this.boardView[this.coordinate.getRow()][this.coordinate.getColumn()].setSelected(true);
     } else {
       this.pieceIsSelected = false;
     }
+    return null;
   }
 
   private getSquarePiece(): MySquare {
@@ -96,10 +99,10 @@ export class DraughtsService {
     this.boardView[coordinate.getRow()][coordinate.getColumn()].put(this.piece);
   }
 
-  public movePiece(target: Coordinate) {
+  private movePiece(target: Coordinate): Error {
     let error: Error = this.game.move([this.coordinate, target]);
     if (error === null) {
-      this.getSquarePiece().clear();
+      this.getSquarePiece().clearPiece();
       this.putPiece(target);
       let direction: DirectionClass = this.coordinate.getDirection(target);
       if (this.coordinate.getDiagonalCoordinate(direction, 2).equals(target)) {
@@ -119,14 +122,15 @@ export class DraughtsService {
         this.turn = this.game.getTurnColor();
       }
     } else {
-      alert(getError(error));
+      alert(getErrorValues()[error]);
     }
     if (this.game.isBlocked()) {
       alert('Fin del juego, el ganador es: ' + colorValues()[this.game.getOppositeTurnColor()]);
     }
+    return error;
   }
 
-  transformPawnToDraught(coordinate: Coordinate) {
+  private transformPawnToDraught(coordinate: Coordinate) {
     if (this.game.getPiece(coordinate).getCode() === 'N' && coordinate.isLast()) {
       this.boardView[coordinate.getRow()][coordinate.getColumn()].put(new Draught(Color.BLACK));
     } else if (this.game.getPiece(coordinate).getCode() === 'B' && coordinate.isFirst()) {
@@ -134,11 +138,33 @@ export class DraughtsService {
     }
   }
 
-  clearJumpedPiece(coordinate: Coordinate) {
+  private clearJumpedPiece(coordinate: Coordinate) {
     this.boardView[coordinate.getRow()][coordinate.getColumn()].put(null);
   }
 
-  getTurnColor(): Color {
+  public getTurnColor(): Color {
     return colorValues()[this.turn];
   }
+
+  public getPiece(): Piece {
+    return this.piece;
+  }
+
+  public isPieceSelected(): boolean {
+    return this.pieceIsSelected;
+  }
+
+  public isMultiJump(): boolean {
+    return this.multiJump;
+  }
+
+  public setPiece(piece: Piece, row: number, column: number) {
+    this.boardView[row][column].setPiece(piece);
+    this.game.changePiece(piece, row, column);
+  }
+
+  public getNumberOfPieces(color: Color): number{
+    return this.game.getNumberOfPieces(color);
+  }
+
 }

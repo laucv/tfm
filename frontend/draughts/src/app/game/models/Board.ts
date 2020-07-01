@@ -28,6 +28,10 @@ export class Board {
     return this.pieces[coordinate.getRow()][coordinate.getColumn()];
   }
 
+  setPiece(piece: Piece, row: number, column: number){
+    this.pieces[row][column] = piece;
+  }
+
   put(coordinate: Coordinate, piece: Piece) {
     if (coordinate !== null) {
       this.pieces[coordinate.getRow()][coordinate.getColumn()] = piece;
@@ -120,18 +124,4 @@ export class Board {
     return result;
   }
 
-  imprimiiiiir() {
-    let result: string = '|';
-    for (let i: number = 0; i < Coordinate.getDimension(); i++) {
-      for (let j: number = 0; j < Coordinate.getDimension(); j++) {
-        if (this.pieces[i][j] !== null) {
-          result += this.pieces[i][j].getCode() + '|';
-        } else {
-          result += '  |';
-        }
-      }
-      result += '\n|';
-    }
-    return result;
-  }
 }

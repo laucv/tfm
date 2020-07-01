@@ -16,12 +16,8 @@ export enum Error {
 
 const StringIsNumber = value => isNaN(Number(value)) === false;
 
-function getErrorValues() {
+export function getErrorValues() {
   return Object.keys(Error)
     .filter(StringIsNumber)
     .map(key => Error[key]);
-}
-
-export function getError(error: Error) {
-  return getErrorValues()[error];
 }

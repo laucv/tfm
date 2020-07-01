@@ -12,30 +12,12 @@ export class Coordinate {
     this.column = column;
   }
 
-  public static getInstance(format: string): Coordinate {
-    if (format === null) {
-      return null;
-    }
-    try {
-      let value = Number(format);
-      let row = value / 10 - 1;
-      let column = value % 10 - 1;
-      let coordinate: Coordinate = new Coordinate(row, column);
-      if (!coordinate.isWithIn()) {
-        return null;
-      }
-      return coordinate;
-    } catch (exception) {
-      return null;
-    }
-  }
-
   private isWithIn(): boolean {
     return Coordinate.LOWER_LIMIT <= this.row && this.row <= Coordinate.UPPER_LIMIT
       && Coordinate.LOWER_LIMIT <= this.column && this.column <= Coordinate.UPPER_LIMIT;
   }
 
-  private substract(coordinate: Coordinate): Coordinate {
+  private subtract(coordinate: Coordinate): Coordinate {
     return new Coordinate(this.row - coordinate.row, this.column - coordinate.column);
   }
 
@@ -43,11 +25,11 @@ export class Coordinate {
     return new Coordinate(this.row + coordinate.row, this.column + coordinate.column);
   }
 
-  getDirection(coordinate: Coordinate): DirectionClass {
+  public getDirection(coordinate: Coordinate): DirectionClass {
     if (coordinate === null) {
       return null;
     }
-    let substract: Coordinate = coordinate.substract(this);
+    let substract: Coordinate = coordinate.subtract(this);
     for (let direction of DirectionClass.values()) {
       if (direction.isOnDirection(substract)) {
         return direction;
@@ -56,23 +38,15 @@ export class Coordinate {
     return null;
   }
 
-  isOnDiagonal(coordinate: Coordinate): boolean {
+  public isOnDiagonal(coordinate: Coordinate): boolean {
     return this.getDirection(coordinate) != null;
   }
 
-  getDiagonalDistance(coordinate: Coordinate): number {
+  public getDiagonalDistance(coordinate: Coordinate): number {
     if (!this.isOnDiagonal(coordinate)) {
       return null;
     }
-    return Math.abs(this.substract(coordinate).getRow());
-  }
-
-  getBetweenDiagonalCoordinate(coordinate: Coordinate): Coordinate {
-    if (this.getDiagonalDistance(coordinate) != 2) {
-      return null;
-    }
-    const direction: DirectionClass = this.getDirection(coordinate);
-    return this.plus(this.getDistanceCoordinate(direction, 1));
+    return Math.abs(this.subtract(coordinate).getRow());
   }
 
   private getDistanceCoordinate(direction: DirectionClass, distance: number): Coordinate {
@@ -97,7 +71,7 @@ export class Coordinate {
     return this.getRow() === coordinate.getRow() && this.getColumn() === coordinate.getColumn();
   }
 
-  getDiagonalCoordinates(level: number): Array<Coordinate> {
+  public getDiagonalCoordinates(level: number): Array<Coordinate> {
     let diagonalCoordinates: Array<Coordinate> = new Array<Coordinate>();
     for (let direction of DirectionClass.values()) {
       let diagonalCoordinate: Coordinate = this.plus(this.getDistanceCoordinate(direction, level));
@@ -108,36 +82,32 @@ export class Coordinate {
     return diagonalCoordinates;
   }
 
-  getDiagonalCoordinate(direction: DirectionClass, level: number): Coordinate {
+  public getDiagonalCoordinate(direction: DirectionClass, level: number): Coordinate {
     return this.plus(this.getDistanceCoordinate(direction, level));
   }
 
-  isBlack(): boolean {
+  public isBlack(): boolean {
     return (this.row + this.column) % 2 != 0;
   }
 
-  isLast(): boolean {
+  public isLast(): boolean {
     return this.row == Coordinate.UPPER_LIMIT;
   }
 
-  isFirst(): boolean {
+  public isFirst(): boolean {
     return this.row == Coordinate.LOWER_LIMIT;
   }
 
-  getRow(): number {
+  public getRow(): number {
     return this.row;
   }
 
-  getColumn(): number {
+  public getColumn(): number {
     return this.column;
   }
 
   public static getDimension(): number {
     return Coordinate.DIMENSION;
-  }
-
-  public imprimir(): string {
-    return "Coordinate: [" + this.getRow() + ", " + this.getColumn() + "]";
   }
 
 }

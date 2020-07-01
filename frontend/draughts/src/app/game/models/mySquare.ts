@@ -1,6 +1,6 @@
-import {Piece} from '../../models/Piece';
+import {Piece} from './Piece';
 
-export class MySquare{
+export class MySquare {
   private row: number;
   private column: number;
   private piece: Piece;
@@ -13,37 +13,42 @@ export class MySquare{
     this.selected = false;
   }
 
-  getRow(): number{
+  getRow(): number {
     return this.row;
   }
 
-  getColumn(): number{
+  getColumn(): number {
     return this.column;
   }
 
-  public getPiece(): Piece{
+  public getPiece(): Piece {
     return this.piece;
   }
 
-  public getPieceType(): string{
-    if(this.piece === null)
+  public getPieceType(): string {
+    if (this.piece === null) {
       return '';
+    }
     return this.piece.getCode();
   }
 
-  public setSelected(value: boolean){
+  public setSelected(value: boolean) {
     this.selected = value;
   }
 
-  public isSelected(): boolean{
+  public isSelected(): boolean {
     return this.selected;
   }
 
-  clear(){
+  clearPiece() {
     this.piece = null;
   }
 
-  put(piece: Piece){
+  put(piece: Piece) {
+    this.piece = piece;
+  }
+
+  setPiece(piece: Piece) {
     this.piece = piece;
   }
 }
