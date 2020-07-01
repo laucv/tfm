@@ -5,7 +5,7 @@ export class Turn {
   private color: Color;
 
   constructor() {
-    this.color = Color.WHITE;
+    this.color = Color.RED;
   }
 
   change(){

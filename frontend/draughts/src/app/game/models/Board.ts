@@ -86,7 +86,7 @@ export class Board {
   }
 
   checkDiagonals(availablePiecesToJump: Array<Coordinate>, color: Color, coordinate: Coordinate) {
-    if (color === Color.WHITE && coordinate.getRow() > Board.MINIMUM_LIMIT_TO_JUMP) {
+    if (color === Color.RED && coordinate.getRow() > Board.MINIMUM_LIMIT_TO_JUMP) {
       if (coordinate.getColumn() < Board.MAXIMUM_LIMIT_TO_JUMP && this.jumpIsPossible(coordinate, DirectionClass.SE)) {
         availablePiecesToJump.push(coordinate);
       }

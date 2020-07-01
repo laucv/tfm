@@ -1,7 +1,7 @@
 import {Coordinate} from './Coordinate';
 
 export enum Color {
-  WHITE,
+  RED,
   BLACK
 }
 
@@ -9,8 +9,8 @@ const LIMITS: number[] = [5, 2];
 const StringIsNumber = value => isNaN(Number(value)) === false;
 
 function getColor(row: number): Color {
-  if (row >= LIMITS[Color.WHITE.valueOf()]) {
-    return Color.WHITE;
+  if (row >= LIMITS[Color.RED.valueOf()]) {
+    return Color.RED;
   } else if (row <= LIMITS[Color.BLACK.valueOf()]) {
     return Color.BLACK;
   }
@@ -28,7 +28,7 @@ export function colorGetInitialColor(coordinate: Coordinate): Color {
 
 export function getColorValue(color: number): Color {
   if(color === 0)
-    return Color.WHITE;
+    return Color.RED;
   if(color === 1)
     return Color.BLACK;
   return null;

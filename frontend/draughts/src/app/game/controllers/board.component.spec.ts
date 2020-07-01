@@ -40,6 +40,6 @@ describe('BoardComponent', () => {
 
   it('getTurnColor() gets the correct color on init', inject([DraughtsService], (injectService: DraughtsService) =>{
     fixture.detectChanges();
-    expect(component.getTurnColor()).toBe(colorValues()[Color.WHITE]);
+    expect(component.getTurnColor()).toBe(colorValues()[Color.RED]);
   }));
 });

@@ -30,7 +30,7 @@ export class Game {
         this.board.put(coordinate, piece);
       }
     }
-    if (this.turn.getColor() != Color.WHITE) {
+    if (this.turn.getColor() !== Color.RED) {
       this.turn.change();
     }
   }

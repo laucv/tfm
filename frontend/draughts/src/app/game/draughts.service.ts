@@ -54,7 +54,7 @@ export class DraughtsService {
     if (row < 3) {
       this.boardView[row][column] = new MySquare(new Pawn(Color.BLACK), row, column);
     } else if (row > 4) {
-      this.boardView[row][column] = new MySquare(new Pawn(Color.WHITE), row, column);
+      this.boardView[row][column] = new MySquare(new Pawn(Color.RED), row, column);
     } else {
       this.boardView[row][column] = new MySquare(null, row, column);
     }
@@ -134,7 +134,7 @@ export class DraughtsService {
     if (this.game.getPiece(coordinate).getCode() === 'N' && coordinate.isLast()) {
       this.boardView[coordinate.getRow()][coordinate.getColumn()].put(new Draught(Color.BLACK));
     } else if (this.game.getPiece(coordinate).getCode() === 'B' && coordinate.isFirst()) {
-      this.boardView[coordinate.getRow()][coordinate.getColumn()].put(new Draught(Color.WHITE));
+      this.boardView[coordinate.getRow()][coordinate.getColumn()].put(new Draught(Color.RED));
     }
   }
 

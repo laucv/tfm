@@ -42,7 +42,7 @@ describe('MySquareComponet', () => {
     component.square = service.getBoardView()[5][2];
     component.userMoves();
     fixture.detectChanges();
-    expect(service.getPiece()).toEqual(new Pawn(Color.WHITE));
+    expect(service.getPiece()).toEqual(new Pawn(Color.RED));
     expect(service.isPieceSelected()).toBeTrue();
   });
 
@@ -62,7 +62,7 @@ describe('MySquareComponet', () => {
     service.setPiece(null, 0, 7);
     service.setPiece(null, 2, 5);
     service.setPiece(null, 0, 3);
-    service.setPiece(new Pawn(Color.WHITE), 4, 3);
+    service.setPiece(new Pawn(Color.RED), 4, 3);
     service.setPiece(new Pawn(Color.BLACK), 3, 4);
     component.square = service.getBoardView()[4][3];
     component.userMoves();
@@ -119,8 +119,8 @@ describe('MySquareComponet', () => {
   });
 
   it('should test Draught movement from Coordinate [5, 0] to [4,1]', () => {
-    service.setPiece(new Draught(Color.WHITE), 5, 0);
-    expect(service.getBoardView()[5][0].getPiece()).toEqual(new Draught(Color.WHITE));
+    service.setPiece(new Draught(Color.RED), 5, 0);
+    expect(service.getBoardView()[5][0].getPiece()).toEqual(new Draught(Color.RED));
     component.square = service.getBoardView()[5][0];
     component.userMoves();
     component.square = service.getBoardView()[4][1];
@@ -137,7 +137,7 @@ describe('MySquareComponet', () => {
     component.userMoves();
     service.setPiece(null, 6, 1);
     service.setPiece(null, 6, 5);
-    service.setPiece(new Pawn(Color.WHITE), 3, 4);
+    service.setPiece(new Pawn(Color.RED), 3, 4);
     component.square = service.getBoardView()[2][5];
     component.userMoves();
     expect(service.isPieceSelected()).toBeTrue();
@@ -146,14 +146,14 @@ describe('MySquareComponet', () => {
     component.userMoves();
     expect(component.square.getPiece()).not.toEqual(null);
     expect(service.isPieceSelected()).toBeTrue();
-    expect(service.getNumberOfPieces(Color.WHITE)).toEqual(10);
+    expect(service.getNumberOfPieces(Color.RED)).toEqual(10);
     component.userMoves();
     expect(service.isMultiJump()).toBeTrue();
     component.square = service.getBoardView()[6][1];
     component.userMoves();
     expect(component.square.getPiece()).not.toEqual(null);
     expect(service.isPieceSelected()).toBeFalse();
-    expect(service.getNumberOfPieces(Color.WHITE)).toEqual(9);
+    expect(service.getNumberOfPieces(Color.RED)).toEqual(9);
     fixture.detectChanges();
   });
 
@@ -183,7 +183,7 @@ describe('MySquareComponet', () => {
   });
 
   it('should return TOO_MUCH_EATINGS error', () => {
-    service.setPiece(new Draught(Color.WHITE), 5, 2);
+    service.setPiece(new Draught(Color.RED), 5, 2);
     service.setPiece(new Draught(Color.BLACK), 4, 3);
     service.setPiece(new Draught(Color.BLACK), 3, 4);
     service.setPiece(null, 2, 5);
@@ -202,7 +202,7 @@ describe('MySquareComponet', () => {
       }
     }
     expect(service.getNumberOfPieces(Color.BLACK)).toEqual(0);
-    service.setPiece(new Pawn(Color.WHITE), 5, 2);
+    service.setPiece(new Pawn(Color.RED), 5, 2);
     service.setPiece(new Pawn(Color.BLACK), 4, 3);
     expect(service.getNumberOfPieces(Color.BLACK)).toEqual(1);
     component.square = service.getBoardView()[5][2];
@@ -211,6 +211,5 @@ describe('MySquareComponet', () => {
     component.userMoves();
     expect(service.getNumberOfPieces(Color.BLACK)).toEqual(0);
   });
-
 
 });

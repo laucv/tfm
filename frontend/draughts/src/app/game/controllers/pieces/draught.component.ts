@@ -10,5 +10,5 @@ import {Color} from '../../models/Color';
 export class DraughtComponent {
   @Input() draught: Draught;
   BLACK = Color.BLACK;
-  WHITE = Color.WHITE;
+  RED = Color.RED;
 }

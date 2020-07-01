@@ -10,5 +10,5 @@ import {Color} from '../../models/Color';
 export class PawnComponent {
   @Input() pawn: Pawn;
   BLACK = Color.BLACK;
-  WHITE = Color.WHITE;
+  RED = Color.RED;
 }
