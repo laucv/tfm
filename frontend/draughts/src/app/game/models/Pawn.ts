@@ -12,13 +12,13 @@ export class Pawn extends Piece{
     super(color);
   }
 
-  isCorrectDiagonalMovement(amountBetweenDiagonalPieces: number, pair: number, coordinates: Coordinate[]): Error {
+  isCorrectDiagonalMovement(pieceAmountBetweenCoordinates: number, pair: number, coordinates: Coordinate[]): Error {
     if (!this.isAdvanced(coordinates[pair], coordinates[pair+1]))
       return Error.NOT_ADVANCED;
     let  distance: number = Number(coordinates[pair].getDiagonalDistance(coordinates[pair+1]));
     if (distance > Pawn.MAX_DISTANCE)
       return Error.TOO_MUCH_ADVANCED;
-    if (distance === Pawn.MAX_DISTANCE && amountBetweenDiagonalPieces !== 1)
+    if (distance === Pawn.MAX_DISTANCE && pieceAmountBetweenCoordinates !== 1)
       return Error.WITHOUT_EATING;
     return null;
   }

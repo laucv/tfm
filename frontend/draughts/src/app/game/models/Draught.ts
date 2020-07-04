@@ -1,14 +1,20 @@
-import {Piece} from "./Piece";
-import {Coordinate} from "./Coordinate";
-import {Error} from "./Error";
+import {Piece} from './Piece';
+import {Coordinate} from './Coordinate';
+import {Error} from './Error';
 
 export class Draught extends Piece {
 
   private static readonly CODES: string[] = ['B', 'N'];
+  private static readonly MAX_DISTANCE_JUMP: number = 2;
 
-  isCorrectDiagonalMovement(amountBetweenDiagonalPieces: number, pair: number, coordinates: Coordinate[]): Error {
-    if (amountBetweenDiagonalPieces > 1)
+  isCorrectDiagonalMovement(pieceAmountBetweenCoordinates: number, pair: number, coordinates: Coordinate[]): Error {
+    let distance: number = Number(coordinates[pair].getDiagonalDistance(coordinates[pair + 1]));
+    if (distance > Draught.MAX_DISTANCE_JUMP && pieceAmountBetweenCoordinates === 1) {
+      return Error.TOO_MUCH_DISTANCE_TO_JUMP;
+    }
+    if (pieceAmountBetweenCoordinates > 1) {
       return Error.TOO_MUCH_EATINGS;
+    }
     return null;
   }
 
