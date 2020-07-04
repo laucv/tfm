@@ -1,5 +1,3 @@
-import {Color} from './Color';
-
 export enum Error {
   BAD_FORMAT,
   EMPTY_ORIGIN,

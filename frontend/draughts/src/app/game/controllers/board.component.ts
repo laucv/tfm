@@ -1,7 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Coordinate} from '../models/Coordinate';
 import {MySquare} from '../models/mySquare';
-import {Pawn} from '../models/Pawn';
 import {Color} from '../models/Color';
 import {DraughtsService} from '../draughts.service';
 

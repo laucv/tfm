@@ -19,18 +19,18 @@ function getColor(row: number): Color {
 
 export function colorGetInitialColor(coordinate: Coordinate): Color {
   if (coordinate.isBlack()) {
-    for (let color of colorValues()) {
-      return getColor(coordinate.getRow())
-    }
+    return getColor(coordinate.getRow());
   }
   return null;
 }
 
 export function getColorValue(color: number): Color {
-  if(color === 0)
+  if (color === 0) {
     return Color.RED;
-  if(color === 1)
+  }
+  if (color === 1) {
     return Color.BLACK;
+  }
   return null;
 }
 
