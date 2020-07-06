@@ -59,13 +59,11 @@ router.delete('/profile', verify, async (req, res) => {
 });
 
 router.put('/profile', verify, async (req, res) => {
-
     const usernameExists = await User.findOne({username: req.body.username});
     if (usernameExists) {
         res.statusMessage = 'Username alredy exists';
         return res.status(409).send("Username alredy exists");
     }
-
     try {
         await User.updateOne({_id: getUserId(req.headers['auth-token'])},
             {
