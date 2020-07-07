@@ -5,7 +5,7 @@ import {Error} from "./Error";
 
 export class Pawn extends Piece{
 
-  private static readonly CODES: string[] = ['b', 'n'];
+  private static readonly CODES: string[] = ['r', 'n'];
   private static readonly MAX_DISTANCE: number = 2;
 
   constructor(color: Color) {

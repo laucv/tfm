@@ -206,4 +206,8 @@ export class Game {
   public changePiece(piece: Piece, row: number, column: number){
     this.board.setPiece(piece, row, column);
   }
+
+  public imprimir(){
+    this.board.impresion();
+  }
 }

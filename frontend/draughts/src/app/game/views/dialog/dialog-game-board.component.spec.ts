@@ -1,12 +1,12 @@
 import {TestBed, async, ComponentFixture, inject} from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import {BoardComponent} from './board.component';
-import {GameService} from '../game.service';
-import {Color, colorValues} from '../models/Color';
+import {DialogGameBoard} from './dialog-game-board.component';
+import {GameService} from '../../game.service';
+import {Color, colorValues} from '../../models/Color';
 
 describe('BoardComponent', () => {
-  let component: BoardComponent;
-  let fixture: ComponentFixture<BoardComponent>;
+  let component: DialogGameBoard;
+  let fixture: ComponentFixture<DialogGameBoard>;
   let testBedService: GameService;
 
   beforeEach(async(() => {
@@ -15,13 +15,13 @@ describe('BoardComponent', () => {
         RouterTestingModule
       ],
       declarations: [
-        BoardComponent
+        DialogGameBoard
       ],
       providers: [
         GameService
       ]
     });
-    fixture = TestBed.createComponent(BoardComponent);
+    fixture = TestBed.createComponent(DialogGameBoard);
     component = fixture.componentInstance;
   }));
 

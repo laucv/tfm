@@ -19,7 +19,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {LoginComponent} from './users/login/login.component';
 import {ProfileComponent} from './users/profile/profile.component';
 import {WelcomeComponent} from './welcome/welcome.component';
-import {BoardComponent} from './game/controllers/board.component';
+import {DialogGameBoard} from './game/views/dialog/dialog-game-board.component';
 import {MySquareComponent} from './game/controllers/mySquare.component';
 import {DraughtComponent} from './game/controllers/pieces/draught.component';
 import {PawnComponent} from './game/controllers/pieces/pawn.component';
@@ -27,6 +27,7 @@ import {GameService} from './game/game.service';
 import {DraughtsService} from './services/draughts.service';
 import {DialogGameName} from './game/views/dialog/DialogGameName.component';
 import {MatDialogModule} from '@angular/material/dialog';
+import {OpenGame} from './openGame/openGame.component';
 
 @NgModule({
   declarations: [
@@ -37,11 +38,12 @@ import {MatDialogModule} from '@angular/material/dialog';
     LoginComponent,
     ProfileComponent,
     WelcomeComponent,
-    BoardComponent,
+    DialogGameBoard,
     MySquareComponent,
     DraughtComponent,
     PawnComponent,
-    DialogGameName
+    DialogGameName,
+    OpenGame
   ],
   imports: [
     BrowserModule,
@@ -58,7 +60,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatDialogModule
   ],
   entryComponents: [
-    DialogGameName
+    DialogGameName,
+    DialogGameBoard
   ],
   providers: [
     UserService,

@@ -45,6 +45,7 @@ export class GameService {
           this.initialize(i, j);
         } else {
           this.boardView[i][j] = new MySquare(null, i, j);
+          this.setPiece(null, i, j);
         }
       }
     }
@@ -53,10 +54,13 @@ export class GameService {
   private initialize(row: number, column: number) {
     if (row < 3) {
       this.boardView[row][column] = new MySquare(new Pawn(Color.BLACK), row, column);
+      this.setPiece(new Pawn(Color.BLACK), row, column);
     } else if (row > 4) {
       this.boardView[row][column] = new MySquare(new Pawn(Color.RED), row, column);
+      this.setPiece(new Pawn(Color.RED), row, column);
     } else {
       this.boardView[row][column] = new MySquare(null, row, column);
+      this.setPiece(null, row, column);
     }
   }
 
@@ -85,13 +89,11 @@ export class GameService {
 
   private getSquarePiece(): MySquare {
     let mySquare: MySquare = null;
-
     this.boardView.forEach(row => row.forEach(square => {
       if (square.getPiece() === this.piece) {
         mySquare = square;
       }
     }));
-
     return mySquare;
   }
 
@@ -133,7 +135,7 @@ export class GameService {
   private transformPawnToDraught(coordinate: Coordinate) {
     if (this.game.getPiece(coordinate).getCode() === 'N' && coordinate.isLast()) {
       this.boardView[coordinate.getRow()][coordinate.getColumn()].put(new Draught(Color.BLACK));
-    } else if (this.game.getPiece(coordinate).getCode() === 'B' && coordinate.isFirst()) {
+    } else if (this.game.getPiece(coordinate).getCode() === 'R' && coordinate.isFirst()) {
       this.boardView[coordinate.getRow()][coordinate.getColumn()].put(new Draught(Color.RED));
     }
   }
@@ -163,20 +165,25 @@ export class GameService {
     this.game.changePiece(piece, row, column);
   }
 
-  public getNumberOfPieces(color: Color): number{
+  public getNumberOfPieces(color: Color): number {
     return this.game.getNumberOfPieces(color);
   }
 
-  public toStringBoard(): string{
+  public toStringBoard(): string {
     let string: string = '';
-    for (let i = 0; i < Coordinate.getDimension(); i++)
-      for (let j = 0; j <Coordinate.getDimension(); j++){
-        if(this.boardView[i][j].getPiece() === null)
+    for (let i = 0; i < Coordinate.getDimension(); i++) {
+      for (let j = 0; j < Coordinate.getDimension(); j++) {
+        if (this.boardView[i][j].getPiece() === null) {
           string += '_';
-        else
+        } else {
           string += this.boardView[i][j].getPiece().getCode();
+        }
       }
+    }
     return string;
   }
 
+  public getDimension(): number {
+    return Coordinate.getDimension();
+  }
 }

@@ -1,5 +1,10 @@
 <div>
-  <p>{{ getTurnColor() }}</p>
+  <p> Mueve:
+    <img *ngIf="getTurnColor() === 0" src="./assets/images/red.png"
+                  class="turn">
+    <img *ngIf="getTurnColor() === 1" src="./assets/images/black.png"
+         class="turn">
+  </p>
 </div>
 <div>
   <p *ngIf="gameName !== null"> {{gameName}}</p>

@@ -28,7 +28,7 @@ export class Board {
     return this.pieces[coordinate.getRow()][coordinate.getColumn()];
   }
 
-  setPiece(piece: Piece, row: number, column: number){
+  setPiece(piece: Piece, row: number, column: number) {
     this.pieces[row][column] = piece;
   }
 
@@ -122,6 +122,21 @@ export class Board {
       }
     }
     return result;
+  }
+
+  impresion() {
+    let string: string = '';
+    for (let i = 0; i < Coordinate.getDimension(); i++) {
+      for (let j = 0; j < Coordinate.getDimension(); j++) {
+        if (this.pieces[i][j] === null) {
+          string += '_';
+        } else {
+          string += this.pieces[i][j].getCode();
+        }
+      }
+    }
+    return string;
+
   }
 
 }

@@ -4,7 +4,7 @@ import {Error} from './Error';
 
 export class Draught extends Piece {
 
-  private static readonly CODES: string[] = ['B', 'N'];
+  private static readonly CODES: string[] = ['R', 'N'];
   private static readonly MAX_DISTANCE_JUMP: number = 2;
 
   isCorrectDiagonalMovement(pieceAmountBetweenCoordinates: number, pair: number, coordinates: Coordinate[]): Error {

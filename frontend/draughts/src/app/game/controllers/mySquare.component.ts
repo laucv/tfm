@@ -8,14 +8,14 @@ import {Error} from '../models/Error';
   templateUrl: '../views/mySquare.component.html',
   styleUrls: ['../views/mySquare.component.css']
 })
-export class MySquareComponent{
+export class MySquareComponent {
 
   @Input() public square: MySquare;
 
   constructor(private gameService: GameService) {
   }
 
-  userMoves(): Error{
-   return this.gameService.userClicks(this.square.getPiece(), this.square.getRow(), this.square.getColumn());
+  userMoves(): Error {
+    return this.gameService.userClicks(this.square.getPiece(), this.square.getRow(), this.square.getColumn());
   }
 }
