@@ -1,14 +1,21 @@
 <div>
   <p> Mueve:
     <img *ngIf="getTurnColor() === 0" src="./assets/images/red.png"
-                  class="turn">
+         class="turn">
     <img *ngIf="getTurnColor() === 1" src="./assets/images/black.png"
          class="turn">
   </p>
 </div>
 <div>
+  <p>
+    <button (click)="logout()" routerLink="/">Logout!</button>
+  </p>
+</div>
+<div>
   <p *ngIf="gameName !== null"> {{gameName}}</p>
-  <p> <button (click)="saveGame()">Save Game</button></p>
+  <p>
+    <button (click)="saveGame()">Save Game</button>
+  </p>
 </div>
 <div class="board">
   <div *ngFor="let row of boardDimension" class="fila">

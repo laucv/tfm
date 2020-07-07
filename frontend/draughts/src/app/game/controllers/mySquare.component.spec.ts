@@ -198,7 +198,6 @@ describe('MySquareComponet', () => {
     for (let i = 0; i < Coordinate.getDimension(); i++) {
       for (let j = 0; j < Coordinate.getDimension(); j++) {
         service.setPiece(null, i, j);
-        console.log("Coordinate[" + i + ", " + j +"]")
       }
     }
     expect(service.getNumberOfPieces(Color.BLACK)).toEqual(0);

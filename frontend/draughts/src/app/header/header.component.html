@@ -10,5 +10,5 @@
 <mat-menu #menu="matMenu">
   <button mat-menu-item><span>Game</span></button>
   <button mat-menu-item *ngIf="!userService.isUserActive()" routerLink="signup"><span>Sign up</span></button>
-  <button mat-menu-item *ngIf="userService.isUserActive()" (click)="userService.logout()" routerLink="login"><span>Log out</span></button>
+  <button mat-menu-item *ngIf="userService.isUserActive()" (click)="userService.logout()" routerLink="/"><span>Log out</span></button>
 </mat-menu>

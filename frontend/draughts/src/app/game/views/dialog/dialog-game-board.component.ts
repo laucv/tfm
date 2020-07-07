@@ -7,18 +7,19 @@ import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog
 import {DialogGameName} from './DialogGameName.component';
 import {Pawn} from '../../models/Pawn';
 import {Draught} from '../../models/Draught';
+import {UserService} from '../../../services/user.service';
 
 @Component({
   selector: 'app-draughts',
-  templateUrl: '../dialog-game-board.component.html',
-  styleUrls: ['../dialog-game-board.component.css']
+  templateUrl: './dialog-game-board.component.html',
+  styleUrls: ['./dialog-game-board.component.css']
 })
 export class DialogGameBoard implements OnInit {
 
   boardDimension: MySquare[][];
   gameName: string;
 
-  constructor(private gameService: GameService, private draughtsService: DraughtsService,
+  constructor(private gameService: GameService, private draughtsService: DraughtsService, private userService: UserService,
               private dialog: MatDialog, public dialogRef: MatDialogRef<DialogGameName>,
               @Inject(MAT_DIALOG_DATA) public data: any) {
     this.gameName = null;
@@ -94,5 +95,10 @@ export class DialogGameBoard implements OnInit {
         }
       );
     });
+  }
+
+  logout(){
+    this.dialog.closeAll();
+    this.userService.logout();
   }
 }
