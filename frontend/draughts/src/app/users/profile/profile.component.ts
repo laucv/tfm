@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {UserService} from "../../services/user.service";
-import {UserModel} from "../../models/User.model";
-import {Router} from "@angular/router";
+import {UserService} from '../../services/user.service';
+import {UserModel} from '../../models/User.model';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-user-profile',
@@ -45,12 +45,9 @@ export class ProfileComponent implements OnInit {
     this.confirmDelete = true;
   }
 
-  logout(){
-    this.userService.logout().subscribe(data => {
-      alert("Thanks for playing Draughts");
-      this.router.navigate(['']);
-    })
-
+  logout() {
+    this.userService.logout();
+    this.router.navigate(['']);
   }
 
   deleteAccount() {

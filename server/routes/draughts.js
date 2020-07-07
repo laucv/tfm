@@ -3,7 +3,6 @@ const router = express.Router();
 const Game = require('../models/Game');
 const User = require('../models/User');
 
-//router.get('/', verify, async (req, res) => {
 router.get('/', async (req, res) => {
     try {
         const games = await Game.find();
@@ -13,10 +12,18 @@ router.get('/', async (req, res) => {
     }
 });
 
-//router.get('/', verify, async (req, res) => {
 router.get('/:gameId', async (req, res) => {
     try {
         const game = await Game.findOne({game_name: req.params.gameId});
+        res.status(200).json(game);
+    } catch (error) {
+        res.status(400).json({message: error});
+    }
+});
+
+router.get('/user/:userId', async (req, res) => {
+    try {
+        const game = await Game.find({creator: req.params.userId});
         res.status(200).json(game);
     } catch (error) {
         res.status(400).json({message: error});

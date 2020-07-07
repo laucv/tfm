@@ -3,6 +3,7 @@ import {DraughtsModel} from '../models/Draughts.model';
 import {DraughtsService} from '../services/draughts.service';
 import {DialogGameBoard} from '../game/views/dialog/dialog-game-board.component';
 import {MatDialog} from '@angular/material/dialog';
+import {UserService} from '../services/user.service';
 
 @Component({
   selector: 'app-open-game',
@@ -11,9 +12,11 @@ import {MatDialog} from '@angular/material/dialog';
 export class OpenGame {
 
   public games: DraughtsModel[];
+  private userId;
 
   constructor(private draughtsService: DraughtsService, private dialog: MatDialog) {
-    this.draughtsService.get().subscribe(data => {
+    this.userId = this.draughtsService.parseJwt()['_id'];
+    this.draughtsService.getAllByUser(this.userId).subscribe(data => {
       this.games = data;
     });
   }
@@ -26,7 +29,7 @@ export class OpenGame {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.draughtsService.get().subscribe(data => {
+      this.draughtsService.getAllByUser(this.userId).subscribe(data => {
         this.games = data;
       });
     });

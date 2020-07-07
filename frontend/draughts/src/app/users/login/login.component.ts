@@ -20,7 +20,7 @@ export class LoginComponent {
     this.userService.login(this.email, this.password).subscribe(
       data => {
         this.userService.saveToken(data['token']);
-        this.router.navigate(['profile']);
+        this.router.navigate(['/']);
       },
       error => {
         this.message = error.statusText;

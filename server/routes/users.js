@@ -108,17 +108,6 @@ router.post('/login', async (req, res) => {
     }
 });
 
-router.post('/logout', verify, async (req, res) => {
-   req.session.destroy(err => {
-       if(err) {
-           res.statusMessage('Could not log out');
-           return res.status(500).send('Could not logout');
-       } else {
-           return res.status(200).send();
-       }
-   })
-});
-
 router.get('/profile', verify, async (req, res) => {
     try {
         const user_id = getUserId(req.headers['auth-token']);
