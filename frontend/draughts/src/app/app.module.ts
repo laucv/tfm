@@ -23,7 +23,10 @@ import {BoardComponent} from './game/controllers/board.component';
 import {MySquareComponent} from './game/controllers/mySquare.component';
 import {DraughtComponent} from './game/controllers/pieces/draught.component';
 import {PawnComponent} from './game/controllers/pieces/pawn.component';
-import {DraughtsService} from './game/draughts.service';
+import {GameService} from './game/game.service';
+import {DraughtsService} from './services/draughts.service';
+import {DialogGameName} from './game/views/dialog/DialogGameName.component';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -37,7 +40,8 @@ import {DraughtsService} from './game/draughts.service';
     BoardComponent,
     MySquareComponent,
     DraughtComponent,
-    PawnComponent
+    PawnComponent,
+    DialogGameName
   ],
   imports: [
     BrowserModule,
@@ -50,10 +54,15 @@ import {DraughtsService} from './game/draughts.service';
     MatToolbarModule,
     HttpClientModule,
     MatMenuModule,
-    MatIconModule
+    MatIconModule,
+    MatDialogModule
+  ],
+  entryComponents: [
+    DialogGameName
   ],
   providers: [
     UserService,
+    GameService,
     DraughtsService
   ],
   bootstrap: [

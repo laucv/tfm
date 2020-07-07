@@ -1,7 +1,10 @@
 <div>
   <p>{{ getTurnColor() }}</p>
 </div>
-
+<div>
+  <p *ngIf="gameName !== null"> {{gameName}}</p>
+  <p> <button (click)="saveGame()">Save Game</button></p>
+</div>
 <div class="board">
   <div *ngFor="let row of boardDimension" class="fila">
     <app-board-square *ngFor="let column of row" [square]="column"></app-board-square>

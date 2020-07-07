@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
 //router.get('/', verify, async (req, res) => {
 router.get('/:gameId', async (req, res) => {
     try {
-        const game = await Game.findById({_id: req.params.gameId});
+        const game = await Game.findOne({game_name: req.params.gameId});
         res.status(200).json(game);
     } catch (error) {
         res.status(400).json({message: error});
@@ -45,7 +45,7 @@ router.post('/', async (req, res) => {
 
 router.put('/:gameId', async (req, res) => {
     try {
-        await Game.updateOne({_id: req.params.gameId},
+        await Game.updateOne({game_name: req.params.gameId},
             {
                 $set:
                     {
@@ -53,7 +53,7 @@ router.put('/:gameId', async (req, res) => {
                         turn: req.body.turn
                     }
             });
-        const game = await Game.findById({_id: req.params.gameId});
+        const game = await Game.findOne({game_name: req.params.gameId});
         res.status(200).json({_id: game._id, game_name: game.game_name, board: game.board, turn: game.turn});
     } catch (error) {
         res.status(400).json({message: error});

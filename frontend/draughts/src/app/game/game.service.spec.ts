@@ -1,9 +1,9 @@
 import {async, TestBed} from '@angular/core/testing';
 import {RouterTestingModule} from '@angular/router/testing';
-import {DraughtsService} from './draughts.service';
+import {GameService} from './game.service';
 
-describe('DraughtsService', () => {
-  let service: DraughtsService;
+describe('GameService', () => {
+  let service: GameService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -12,10 +12,10 @@ describe('DraughtsService', () => {
       ],
       declarations: [],
       providers: [
-        DraughtsService
+        GameService
       ]
     });
-    service = TestBed.inject(DraughtsService);
+    service = TestBed.inject(GameService);
   }));
 
   it('should be created', () => {

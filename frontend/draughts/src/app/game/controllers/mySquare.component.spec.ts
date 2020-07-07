@@ -1,6 +1,6 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {RouterTestingModule} from '@angular/router/testing';
-import {DraughtsService} from '../draughts.service';
+import {GameService} from '../game.service';
 import {MySquareComponent} from './mySquare.component';
 import {Color} from '../models/Color';
 import {Pawn} from '../models/Pawn';
@@ -11,7 +11,7 @@ import {Coordinate} from '../models/Coordinate';
 describe('MySquareComponet', () => {
   let component: MySquareComponent;
   let fixture: ComponentFixture<MySquareComponent>;
-  let service: DraughtsService;
+  let service: GameService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -22,12 +22,12 @@ describe('MySquareComponet', () => {
         MySquareComponent
       ],
       providers: [
-        DraughtsService
+        GameService
       ]
     });
     fixture = TestBed.createComponent(MySquareComponent);
     component = fixture.componentInstance;
-    service = TestBed.get(DraughtsService);
+    service = TestBed.get(GameService);
   }));
 
   afterEach(() => {

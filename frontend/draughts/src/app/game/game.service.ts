@@ -12,7 +12,7 @@ import {DirectionClass} from './models/DirectionClass';
 @Injectable({
   providedIn: 'root',
 })
-export class DraughtsService {
+export class GameService {
 
   private piece: Piece;
   private turn: Color;
@@ -143,7 +143,7 @@ export class DraughtsService {
   }
 
   public getTurnColor(): Color {
-    return colorValues()[this.turn];
+    return this.turn;
   }
 
   public getPiece(): Piece {
@@ -165,6 +165,18 @@ export class DraughtsService {
 
   public getNumberOfPieces(color: Color): number{
     return this.game.getNumberOfPieces(color);
+  }
+
+  public toStringBoard(): string{
+    let string: string = '';
+    for (let i = 0; i < Coordinate.getDimension(); i++)
+      for (let j = 0; j <Coordinate.getDimension(); j++){
+        if(this.boardView[i][j].getPiece() === null)
+          string += '_';
+        else
+          string += this.boardView[i][j].getPiece().getCode();
+      }
+    return string;
   }
 
 }

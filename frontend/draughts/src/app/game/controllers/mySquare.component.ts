@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {MySquare} from '../models/mySquare';
-import {DraughtsService} from '../draughts.service';
+import {GameService} from '../game.service';
 import {Error} from '../models/Error';
 
 @Component({
@@ -12,10 +12,10 @@ export class MySquareComponent{
 
   @Input() public square: MySquare;
 
-  constructor(private draughtsService: DraughtsService) {
+  constructor(private gameService: GameService) {
   }
 
   userMoves(): Error{
-   return this.draughtsService.userClicks(this.square.getPiece(), this.square.getRow(), this.square.getColumn());
+   return this.gameService.userClicks(this.square.getPiece(), this.square.getRow(), this.square.getColumn());
   }
 }
