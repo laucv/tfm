@@ -173,6 +173,10 @@ export class Game {
     return this.turn.getColor();
   }
 
+  public resetTurn(){
+    this.turn.resetColor()
+  }
+
   public getOppositeTurnColor(): Color {
     return this.turn.getOppositeColor();
   }

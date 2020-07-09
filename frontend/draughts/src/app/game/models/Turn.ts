@@ -19,4 +19,8 @@ export class Turn {
   getColor() : Color{
     return this.color;
   }
+
+  public resetColor(){
+    this.color = Color.RED;
+  }
 }

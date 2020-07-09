@@ -27,16 +27,25 @@ export class GameService {
     this.piece = null;
     this.coordinate = null;
     this.pieceIsSelected = false;
+    this.resetGame();
     this.turn = this.game.getTurnColor();
     this.multiJump = false;
-    this.initBoard();
   }
 
   public getBoardView(): MySquare[][] {
     return this.boardView;
   }
 
-  public initBoard() {
+  public resetGame(){
+    this.initBoard();
+    this.initTurn();
+  }
+
+  private initTurn(){
+    this.game.resetTurn();
+  }
+
+  private initBoard() {
     this.boardView = [];
     for (let i = 0; i < Coordinate.getDimension(); i++) {
       this.boardView[i] = [];

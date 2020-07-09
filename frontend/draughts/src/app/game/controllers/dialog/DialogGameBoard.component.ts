@@ -11,8 +11,8 @@ import {UserService} from '../../../services/user.service';
 
 @Component({
   selector: 'app-draughts',
-  templateUrl: './dialog-game-board.component.html',
-  styleUrls: ['./dialog-game-board.component.css']
+  templateUrl: '../../views/dialog/dialog-game-board.component.html',
+  styleUrls: ['../../views/dialog/dialog-game-board.component.css']
 })
 export class DialogGameBoard implements OnInit {
 
@@ -30,7 +30,7 @@ export class DialogGameBoard implements OnInit {
       this.getBoard(this.data.board);
       this.gameName = this.data.gameName;
     } else {
-      this.gameService.initBoard();
+      this.gameService.resetGame();
     }
     this.boardDimension = this.gameService.getBoardView();
   }

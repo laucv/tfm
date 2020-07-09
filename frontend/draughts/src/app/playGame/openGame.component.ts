@@ -1,9 +1,9 @@
 import {Component} from '@angular/core';
 import {DraughtsModel} from '../models/Draughts.model';
 import {DraughtsService} from '../services/draughts.service';
-import {DialogGameBoard} from '../game/views/dialog/dialog-game-board.component';
+import {DialogGameBoard} from '../game/controllers/dialog/DialogGameBoard.component';
 import {MatDialog} from '@angular/material/dialog';
-import {UserService} from '../services/user.service';
+import {GameService} from '../game/game.service';
 
 @Component({
   selector: 'app-open-game',
@@ -14,7 +14,7 @@ export class OpenGame {
   public games: DraughtsModel[];
   private userId;
 
-  constructor(private draughtsService: DraughtsService, private dialog: MatDialog) {
+  constructor(private draughtsService: DraughtsService, private dialog: MatDialog, private gameService: GameService) {
     this.userId = this.draughtsService.parseJwt()['_id'];
     this.draughtsService.getAllByUser(this.userId).subscribe(data => {
       this.games = data;

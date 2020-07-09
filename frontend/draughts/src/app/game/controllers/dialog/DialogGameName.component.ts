@@ -3,7 +3,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 
 @Component({
   selector: 'dialog-game-name',
-  templateUrl: 'dialog-game-name.html',
+  templateUrl: '../../views/dialog/dialog-game-name.html',
 })
 export class DialogGameName {
 

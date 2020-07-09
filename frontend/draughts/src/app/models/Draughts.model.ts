@@ -3,5 +3,5 @@ export interface DraughtsModel {
   creator: string,
   board: string,
   turn: number,
-  date: Date;
+  date?: Date;
 }

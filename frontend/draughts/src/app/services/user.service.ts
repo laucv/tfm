@@ -7,7 +7,6 @@ import {Observable} from "rxjs";
 export class UserService {
 
   private url: string = 'http://localhost:4600';
-  private token: string = '';
 
   constructor(private http: HttpClient) {
   }

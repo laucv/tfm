@@ -1,8 +1,8 @@
 <div>
   <p> Mueve:
-    <img *ngIf="getTurnColor() === 0" src="./assets/images/red.png"
+    <img *ngIf="this.getTurnColor() === 0" src="./assets/images/red.png"
          class="turn">
-    <img *ngIf="getTurnColor() === 1" src="./assets/images/black.png"
+    <img *ngIf="this.getTurnColor() === 1" src="./assets/images/black.png"
          class="turn">
   </p>
 </div>

@@ -3,7 +3,7 @@ const app = express();
 const mongoose = require('mongoose');
 const port = 4600;
 const userRoutes = require('./routes/users');
-const draughtRoutes = require('./routes/draughts');
+const gameRoutes = require('./routes/games');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const session = require('express-session');
@@ -25,7 +25,7 @@ app.use(session({
 }));
 
 app.use('/users', userRoutes);
-app.use('/draughts', draughtRoutes);
+app.use('/draughts', gameRoutes);
 
 mongoose.connect(process.env.DB_CONNECTION, {useNewUrlParser: true},
     () => console.log('Connected to DB!')

@@ -9,9 +9,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatInputModule} from '@angular/material/input';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
-import {HeaderComponent} from './header/header.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
-import {UserListComponent} from './users/user-list/user-list.component';
 import {UserService} from './services/user.service';
 import {HttpClientModule} from '@angular/common/http';
 import {MatMenuModule} from '@angular/material/menu';
@@ -19,22 +17,20 @@ import {MatIconModule} from '@angular/material/icon';
 import {LoginComponent} from './users/login/login.component';
 import {ProfileComponent} from './users/profile/profile.component';
 import {WelcomeComponent} from './welcome/welcome.component';
-import {DialogGameBoard} from './game/views/dialog/dialog-game-board.component';
+import {DialogGameBoard} from './game/controllers/dialog/DialogGameBoard.component';
 import {MySquareComponent} from './game/controllers/mySquare.component';
 import {DraughtComponent} from './game/controllers/pieces/draught.component';
 import {PawnComponent} from './game/controllers/pieces/pawn.component';
 import {GameService} from './game/game.service';
 import {DraughtsService} from './services/draughts.service';
-import {DialogGameName} from './game/views/dialog/DialogGameName.component';
+import {DialogGameName} from './game/controllers/dialog/DialogGameName.component';
 import {MatDialogModule} from '@angular/material/dialog';
-import {OpenGame} from './openGame/openGame.component';
+import {OpenGame} from './playGame/openGame.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RegistrationComponent,
-    HeaderComponent,
-    UserListComponent,
     LoginComponent,
     ProfileComponent,
     WelcomeComponent,

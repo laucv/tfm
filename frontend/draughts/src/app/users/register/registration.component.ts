@@ -21,7 +21,6 @@ export class RegistrationComponent {
     if (this.password === this.repetedPassword)
       this.userService.registration(this.username, this.email, this.password).subscribe(
         data => {
-          alert(this.password);
           this.router.navigate(['']);
         }
       );
