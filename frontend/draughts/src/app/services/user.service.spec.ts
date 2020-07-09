@@ -67,23 +67,11 @@ describe('UserService', () => {
     const mockUser: UserModel = {_id: '1', username: 'cambio', password: 'passssss1', email: 'username1@email.com'};
     service.updateUser('cambio').subscribe(user => {
       expect(user).not.toBeUndefined();
-      expect(user.username).toEqual('cambio');
       expect(user.email).toEqual('username1@email.com');
+      expect(user.username).toEqual('cambio');
     });
     const request = httpTestingController.expectOne(URL_SERVER + '/users/profile');
     expect(request.request.method).toBe('PUT');
-    request.flush(mockUser);
-  });
-
-  it('should delete user via DELETE', () => {
-    const mockUser: UserModel = {_id: '1', username: 'username1', password: 'passssss1', email: 'username1@email.com'};
-    service.deleteUser().subscribe(user => {
-      expect(user).not.toBeUndefined();
-      expect(user.username).toEqual('username1');
-      expect(user.email).toEqual('username1@email.com');
-    });
-    const request = httpTestingController.expectOne(URL_SERVER + '/users/profile');
-    expect(request.request.method).toBe('DELETE');
     request.flush(mockUser);
   });
 
@@ -96,6 +84,16 @@ describe('UserService', () => {
     });
     const request = httpTestingController.expectOne(URL_SERVER + '/users/profile');
     expect(request.request.method).toBe('GET');
+    request.flush(mockUser);
+  });
+
+  it('should delete user via DELETE', () => {
+    const mockUser: UserModel = {_id: '1', username: 'username1', password: 'passssss1', email: 'username1@email.com'};
+    service.deleteUser().subscribe(user => {
+      expect(user).not.toBeUndefined();
+    });
+    const request = httpTestingController.expectOne(URL_SERVER + '/users/profile');
+    expect(request.request.method).toBe('DELETE');
     request.flush(mockUser);
   });
 
