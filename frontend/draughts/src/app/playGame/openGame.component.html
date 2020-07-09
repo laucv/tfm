@@ -3,10 +3,11 @@
   <button (click)="selectGame(null, null)">Select</button>
 </div>
 <table>
+  <caption>Games to Play</caption>
   <tr>
-    <th>Game Name</th>
-    <th>Date</th>
-    <th></th>
+    <th scope="col">Game Name</th>
+    <th scope="col">Date</th>
+    <th scope="col"></th>
   </tr>
   <tr *ngFor="let game of games">
     <td>{{ game.game_name}}</td>
