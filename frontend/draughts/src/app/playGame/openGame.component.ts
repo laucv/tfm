@@ -3,7 +3,6 @@ import {DraughtsModel} from '../models/Draughts.model';
 import {DraughtsService} from '../services/draughts.service';
 import {DialogGameBoard} from '../game/controllers/dialog/DialogGameBoard.component';
 import {MatDialog} from '@angular/material/dialog';
-import {GameService} from '../game/game.service';
 
 @Component({
   selector: 'app-open-game',
@@ -14,7 +13,7 @@ export class OpenGame {
   public games: DraughtsModel[];
   private userId;
 
-  constructor(private draughtsService: DraughtsService, private dialog: MatDialog, private gameService: GameService) {
+  constructor(private draughtsService: DraughtsService, private dialog: MatDialog) {
     this.userId = this.draughtsService.parseJwt()['_id'];
     this.draughtsService.getAllByUser(this.userId).subscribe(data => {
       this.games = data;

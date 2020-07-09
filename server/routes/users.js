@@ -26,8 +26,8 @@ router.get('/profile/:userId', verify, async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-    const {error} = registerValidation(req.body);
-    if (error) return res.status(400).send(error.details[0].message);
+    const {errorValidation} = registerValidation(req.body);
+    if (errorValidation) return res.status(400).send(errorValidation.details[0].message);
 
     const emailExists = await User.findOne({email: req.body.email});
     if (emailExists) return res.status(409).send("Email alredy exists");

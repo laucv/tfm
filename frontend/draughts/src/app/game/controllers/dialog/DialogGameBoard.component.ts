@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MySquare} from '../../models/mySquare';
-import {Color, colorValues} from '../../models/Color';
+import {Color} from '../../models/Color';
 import {GameService} from '../../game.service';
 import {DraughtsService} from '../../../services/draughts.service';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';

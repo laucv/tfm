@@ -47,5 +47,5 @@ export class DraughtsService {
     }).join(''));
 
     return JSON.parse(jsonPayload);
-  };
+  }
 }
