@@ -153,12 +153,12 @@ export class GameService {
     this.boardView[coordinate.getRow()][coordinate.getColumn()].put(null);
   }
 
-  public getTurnColor(): Color {
-    return this.turn;
-  }
-
   public getPiece(): Piece {
     return this.piece;
+  }
+
+  public getTurnColor(){
+    return this.game.getTurnColor();
   }
 
   public isPieceSelected(): boolean {
@@ -178,6 +178,10 @@ export class GameService {
     return this.game.getNumberOfPieces(color);
   }
 
+  public getDimension(): number {
+    return Coordinate.getDimension();
+  }
+
   public toStringBoard(): string {
     let string: string = '';
     for (let i = 0; i < Coordinate.getDimension(); i++) {
@@ -190,9 +194,5 @@ export class GameService {
       }
     }
     return string;
-  }
-
-  public getDimension(): number {
-    return Coordinate.getDimension();
   }
 }

@@ -58,7 +58,7 @@ describe('MySquareComponet', () => {
     fixture.detectChanges();
   });
 
-  it('should test White Pawn movement with multijump', () => {
+  it('should test Red Pawn movement with multijump', () => {
     service.setPiece(null, 0, 7);
     service.setPiece(null, 2, 5);
     service.setPiece(null, 0, 3);

@@ -1,7 +1,7 @@
 <mat-toolbar color="primary">
   <a class="draughs" routerLink=""><span>Draughts</span></a>
   <button class="menuLogin" *ngIf="userService.isUserActive()" mat-menu-item routerLink="profile">
-    <span><mat-icon>account_circle</mat-icon> My Profole</span>
+    <span><mat-icon>account_circle</mat-icon> My Profile</span>
   </button>
   <button class="menuLogin" *ngIf="userService.isUserActive()" mat-menu-item routerLink="playGame"><span>Play Game!</span></button>
   <button class="menuButton" mat-flat-button [matMenuTriggerFor]="menu">
