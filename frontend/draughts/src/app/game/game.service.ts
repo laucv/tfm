@@ -15,7 +15,6 @@ import {DirectionClass} from './models/DirectionClass';
 export class GameService {
 
   private piece: Piece;
-  private turn: Color;
   private coordinate: Coordinate;
   private game: Game;
   private boardView: MySquare[][];
@@ -28,7 +27,6 @@ export class GameService {
     this.coordinate = null;
     this.pieceIsSelected = false;
     this.resetGame();
-    this.turn = this.game.getTurnColor();
     this.multiJump = false;
   }
 
@@ -36,12 +34,12 @@ export class GameService {
     return this.boardView;
   }
 
-  public resetGame(){
+  public resetGame() {
     this.initBoard();
     this.initTurn();
   }
 
-  private initTurn(){
+  private initTurn() {
     this.game.resetTurn();
   }
 
@@ -121,24 +119,35 @@ export class GameService {
       }
       this.multiJump = this.game.isMultiJumpPossible(target) && this.coordinate.getDiagonalDistance(target) === 2;
       if (this.multiJump) {
-        this.boardView[this.coordinate.getRow()][this.coordinate.getColumn()].setSelected(false);
-        this.boardView[target.getRow()][target.getColumn()].setSelected(true);
-        this.game.changeTurnToAllowMultiJump();
-        this.coordinate = target;
+        this.prepareForMultiJump(target);
         return;
       } else {
         this.transformPawnToDraught(target);
-        this.pieceIsSelected = false;
-        this.boardView[this.coordinate.getRow()][this.coordinate.getColumn()].setSelected(false);
-        this.turn = this.game.getTurnColor();
+        this.prepareForNextMovement();
       }
     } else {
       alert(getErrorValues()[error]);
     }
+    this.checkGameIsFinished();
+    return error;
+  }
+
+  private prepareForNextMovement(){
+    this.pieceIsSelected = false;
+    this.boardView[this.coordinate.getRow()][this.coordinate.getColumn()].setSelected(false);
+  }
+
+  private checkGameIsFinished(){
     if (this.game.isBlocked()) {
       alert('Fin del juego, el ganador es: ' + colorValues()[this.game.getOppositeTurnColor()]);
     }
-    return error;
+  }
+
+  private prepareForMultiJump(target: Coordinate){
+    this.boardView[this.coordinate.getRow()][this.coordinate.getColumn()].setSelected(false);
+    this.boardView[target.getRow()][target.getColumn()].setSelected(true);
+    this.game.changeTurnToAllowMultiJump();
+    this.coordinate = target;
   }
 
   private transformPawnToDraught(coordinate: Coordinate) {
@@ -157,7 +166,7 @@ export class GameService {
     return this.piece;
   }
 
-  public getTurnColor(){
+  public getTurnColor(): Color {
     return this.game.getTurnColor();
   }
 

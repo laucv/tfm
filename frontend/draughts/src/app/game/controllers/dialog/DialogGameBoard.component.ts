@@ -27,7 +27,7 @@ export class DialogGameBoard implements OnInit {
 
   ngOnInit(): void {
     if (this.data.gameName !== null) {
-      this.getBoard(this.data.board);
+      this.setBoard(this.data.board);
       this.gameName = this.data.gameName;
     } else {
       this.gameService.resetGame();
@@ -35,32 +35,24 @@ export class DialogGameBoard implements OnInit {
     this.boardDimension = this.gameService.getBoardView();
   }
 
-  getBoard(board: string): MySquare[][] {
-    let myBoard: MySquare[][] = [];
+  setBoard(board: string){
     let position: number = 0;
     for (let row = 0; row < this.gameService.getDimension(); row++) {
-      myBoard[row] = [];
       for (let column = 0; column < this.gameService.getDimension(); column++) {
         if (board.charAt(position) === '_') {
-          myBoard[row][column] = new MySquare(null, row, column);
           this.gameService.setPiece(null, row, column);
         } else if (board.charAt(position) === 'r') {
-          myBoard[row][column] = new MySquare(new Pawn(Color.RED), row, column);
           this.gameService.setPiece(new Pawn(Color.RED), row, column);
         } else if (board.charAt(position) === 'R') {
-          myBoard[row][column] = new MySquare(new Draught(Color.RED), row, column);
           this.gameService.setPiece(new Draught(Color.RED), row, column);
         } else if (board.charAt(position) === 'n') {
-          myBoard[row][column] = new MySquare(new Pawn(Color.BLACK), row, column);
           this.gameService.setPiece(new Pawn(Color.BLACK), row, column);
         } else if (board.charAt(position) === 'N') {
-          myBoard[row][column] = new MySquare(new Draught(Color.BLACK), row, column);
           this.gameService.setPiece(new Draught(Color.BLACK), row, column);
         }
         position++;
       }
     }
-    return myBoard;
   }
 
   getTurnColor(): Color {
