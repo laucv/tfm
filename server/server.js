@@ -6,7 +6,6 @@ const userRoutes = require('./routes/users');
 const gameRoutes = require('./routes/games');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const session = require('express-session');
 require('dotenv/config');
 
 app.use(cors());
@@ -18,11 +17,6 @@ app.use((req, res, next) => {
     next();
 });
 app.use(bodyParser.json());
-app.use(session({
-    secret: "Shh, its a secret!",
-    resave: true,
-    saveUninitialized: true
-}));
 
 app.use('/users', userRoutes);
 app.use('/draughts', gameRoutes);
