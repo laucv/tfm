@@ -6,13 +6,12 @@ const jwt = require('jsonwebtoken');
 const verify = require('../models/validations/verifyToken');
 const {registerValidation, loginValidacion} = require('../models/validations/userValidation');
 
-//router.get('/', verify, async (req, res) => {
 router.get('/', async (req, res) => {
     try {
         const users = await User.find();
         res.status(200).json(users);
     } catch (error) {
-        res.status(400).json({message: error});
+        res.status(400).json({message: error.toString()});
     }
 });
 
@@ -21,7 +20,7 @@ router.get('/profile/:userId', verify, async (req, res) => {
         const user = await User.findById(req.params.userId);
         res.status(200).json(user);
     } catch (error) {
-        res.status(400).json({message: error});
+        res.status(400).json({message: error.toString()});
     }
 });
 
@@ -45,7 +44,7 @@ router.post('/', async (req, res) => {
         const savedUser = await user.save();
         res.status(200).json({_id: savedUser._id, username: savedUser.username, email: savedUser.email});
     } catch (error) {
-        res.status(400).json({message: error});
+        res.status(400).json({message: error.toString()});
     }
 });
 
@@ -54,7 +53,7 @@ router.delete('/profile', verify, async (req, res) => {
         const removedUser = await User.remove({_id: getUserId(req.headers['auth-token'])});
         res.status(200).json(removedUser);
     } catch (error) {
-        res.status(400).json({message: error});
+        res.status(400).json({message: error.toString()});
     }
 });
 
@@ -75,7 +74,7 @@ router.put('/profile', verify, async (req, res) => {
         const user = await User.findById(getUserId(req.headers['auth-token']));
         res.status(200).json({_id: user._id, username: user.username, email: user.email});
     } catch (error) {
-        res.status(400).json({message: error});
+        res.status(400).json({message: error.toString()});
     }
 });
 
@@ -88,7 +87,7 @@ router.post('/login', async (req, res) => {
         }
 
         const user = await User.findOne({email: req.body.email});
-        if (!user){
+        if (!user) {
             res.statusMessage = 'User doesn\'t exists';
             return res.status(400).send("User doesn\'t exists");
         }
@@ -101,10 +100,9 @@ router.post('/login', async (req, res) => {
 
         var token = jwt.sign({_id: user._id}, process.env.TOKEN_SECRET);
         res.setHeader("auth-token", token);
-        req.session.username = user.username;
         res.status(200).json({token: token});
     } catch (error) {
-        res.status(400).send({message: error});
+        res.status(400).send({message: error.toString()});
     }
 });
 
@@ -114,7 +112,7 @@ router.get('/profile', verify, async (req, res) => {
         const user = await User.findById(user_id);
         res.status(200).json(user);
     } catch (error) {
-        res.status(400).send({message: error});
+        res.status(400).send({message: error.toString()});
     }
 });
 
