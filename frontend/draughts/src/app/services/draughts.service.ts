@@ -2,23 +2,24 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {DraughtsModel} from '../models/Draughts.model';
 import {UserService} from './user.service';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DraughtsService {
 
-  private url: string = 'http://localhost:4600';
+  static API_END_POINT = environment.API;
 
   constructor(private http: HttpClient, private userService: UserService) {
   }
 
   get(){
-    return this.http.get<DraughtsModel[]>(this.url + '/draughts');
+    return this.http.get<DraughtsModel[]>(DraughtsService.API_END_POINT + '/draughts');
   }
 
   getAllByUser(userId: string){
-    return this.http.get<DraughtsModel[]>(this.url + '/draughts/user/' + userId);
+    return this.http.get<DraughtsModel[]>(DraughtsService.API_END_POINT + '/draughts/user/' + userId);
   }
 
   post(game_name: string, board: string, turn: number){
@@ -28,14 +29,14 @@ export class DraughtsService {
       '"board": "' + board + '", ' +
       '"creator": "' + creator + '", ' +
       '"turn":"' + turn + '"}';
-    return this.http.post<DraughtsModel>(this.url + '/draughts', JSON.parse(game));
+    return this.http.post<DraughtsModel>(DraughtsService.API_END_POINT + '/draughts', JSON.parse(game));
   }
 
   put(game_name: string, board: string, turn: number){
     const game = '{' +
       '"board": "' + board + '", ' +
       '"turn":"' + turn + '"}';
-    return this.http.put<DraughtsModel>(this.url + '/draughts/' + game_name, JSON.parse(game));
+    return this.http.put<DraughtsModel>(DraughtsService.API_END_POINT + '/draughts/' + game_name, JSON.parse(game));
   }
 
   parseJwt () {
