@@ -25,11 +25,17 @@ router.get('/profile/:userId', verify, async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-    const {errorValidation} = registerValidation(req.body);
-    if (errorValidation) return res.status(400).send(errorValidation.details[0].message);
+    const {error} = registerValidation(req.body);
+    if (error) {
+        res.statusMessage = error.details[0].message;
+        return res.status(400).send(error.details[0].message);
+    }
 
     const emailExists = await User.findOne({email: req.body.email});
-    if (emailExists) return res.status(409).send("Email alredy exists");
+    if (emailExists) {
+        res.statusMessage = "Email alredy exists";
+        return res.status(409).send("Email alredy exists");
+    }
 
     const salt = await bcrypt.genSalt(10);
     const hashPassword = await bcrypt.hash(req.body.password, salt);
