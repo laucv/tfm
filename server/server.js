@@ -25,6 +25,10 @@ mongoose.connect(process.env.DB_CONNECTION, {useNewUrlParser: true},
     () => console.log('Connected to DB!')
 );
 
+app.get('/', function(req, res) {
+    res.sendFile('index.html', {root: __dirname })
+});
+
 app.listen(port, (req, res) => {
     console.log(`Server on port ${port}`);
 });
